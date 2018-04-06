@@ -12,6 +12,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     sign_in_with :google_login, :google_oauth2
   end
 
+  def ldap
+    sign_in_with :ldap_login, :ldap
+  end
+
   def after_sign_in_path_for(resource)
     if resource.registering_with_oauth
       finish_signup_path
