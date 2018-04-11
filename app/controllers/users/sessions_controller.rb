@@ -20,4 +20,8 @@ class Users::SessionsController < Devise::SessionsController
       stored_path[0..5] == "/email"
     end
 
+    def skip_verification?
+      Setting["feature.user.skip_verification"]
+    end
+
 end

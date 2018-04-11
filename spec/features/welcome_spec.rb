@@ -68,4 +68,24 @@ feature "Welcome screen" do
     expect(page).to have_current_path(root_path)
   end
 
+  scenario 'is not shown to a regular user if the verification its overrided and the user has already logged in 1 time' do
+    user = create(:user, sign_in_count: 1)
+
+    Setting["feature.user.skip_verification"] = 'true'
+
+    login_through_form_as(user)
+
+    expect(page).to have_current_path(root_path)
+  end
+
+  scenario 'is showed to a regular user if the verification its overrided and the user logs in for the first time' do
+    user = create(:user)
+
+    Setting["feature.user.skip_verification"] = 'true'
+
+    login_through_form_as(user)
+
+    expect(page).to have_current_path(welcome_path)
+  end
+
 end

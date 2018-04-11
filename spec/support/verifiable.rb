@@ -179,4 +179,66 @@ shared_examples_for "verifiable" do
     end
   end
 
+  describe "#skip_methods" do
+
+    let(:user) {create(:user)}
+
+    before do
+      Setting["feature.user.skip_verification"] = 'true'
+    end
+
+    it "residence_verified? is true if overrided" do
+      expect(user.residence_verified?).to eq(true)
+    end
+
+    it "sms_verified? is true if overrided" do
+      expect(user.sms_verified?).to eq(true)
+    end
+
+    it "level_two_verified? is true if overrided" do
+      expect(user.level_two_verified?).to eq(true)
+
+      user.update(residence_verified_at: Time.current)
+      expect(user.level_two_verified?).to eq(true)
+
+      user.update(confirmed_phone: "123456789", residence_verified_at: false)
+      expect(user.level_two_verified?).to eq(true)
+    end
+
+    it "level_three_verified? is true  if overrided" do
+      expect(user.level_three_verified?).to eq(true)
+    end
+
+    it "unverified? is true if overrided" do
+      expect(user.unverified?).to eq(false)
+    end
+
+    it "verification_email_sent? is true  if overrided" do
+      expect(user.verification_email_sent?).to eq(true)
+    end
+
+    it "verification_sms_sent? is true  if overrided" do
+      user.update(unconfirmed_phone: nil, sms_confirmation_code: "666")
+      expect(user.verification_sms_sent?).to eq(true)
+
+      user.update(unconfirmed_phone: "666666666", sms_confirmation_code: nil)
+      expect(user.verification_sms_sent?).to eq(true)
+
+      user.update(unconfirmed_phone: nil, sms_confirmation_code: nil)
+      expect(user.verification_sms_sent?).to eq(true)
+    end
+
+    it "verification_letter_sent? is true  if overrided" do
+      user.update(letter_requested_at: nil, letter_verification_code: "666")
+      expect(user.verification_letter_sent?).to eq(true)
+
+      user.update(letter_requested_at: Time.current, letter_verification_code: nil)
+      expect(user.verification_letter_sent?).to eq(true)
+
+      user.update(letter_requested_at: nil, letter_verification_code: nil)
+      expect(user.verification_letter_sent?).to eq(true)
+    end
+
+  end
+
 end

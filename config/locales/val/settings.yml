@@ -42,6 +42,7 @@ val:
       legislation: Legislació
       user:
         recommendations: Recomanacions
+        skip_verification: Ignorar verificacíon de usuario
       community: Comunitat en propostes i projectes d'inversió
       map: Geolocalització de propostes y projectes d'inversió
       allow_images: Permetre la pujada i visualització d'imatges

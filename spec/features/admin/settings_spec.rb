@@ -89,4 +89,46 @@ feature 'Admin settings' do
 
   end
 
+  describe "Skip verification" do
+
+    scenario "deactivate verification", :js do
+      Setting["feature.user.skip_verification"] = 'true'
+      setting = Setting.where(key: "feature.user.skip_verification").first
+      admin = create(:administrator).user
+      login_as(admin)
+
+      visit admin_settings_path
+      find("#edit_setting_#{setting.id} .button").click
+
+      page.accept_confirm do
+        click_button('OK')
+      end
+
+      user = create(:user, sign_in_count: 1)
+      login_through_form_as(user)
+
+      expect(page).to have_current_path(welcome_path)
+    end
+
+    scenario "activate verification", :js do
+      Setting["feature.user.skip_verification"] = 'false'
+      setting = Setting.where(key: "feature.user.skip_verification").first
+      admin = create(:administrator).user
+      login_as(admin)
+
+      visit admin_settings_path
+      find("#edit_setting_#{setting.id} .button").click
+
+      page.accept_confirm do
+        click_button('OK')
+      end
+
+      user = create(:user, sign_in_count: 1)
+      login_through_form_as(user)
+
+      expect(page).to have_current_path(root_path)
+    end
+
+  end
+
 end
