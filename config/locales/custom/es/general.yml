@@ -201,7 +201,7 @@ es:
       consul: aplicación CONSUL
       consul_url: https://github.com/consul/consul
       contact_us: Para asistencia técnica entra en
-      copyright: CONSUL, %{year}
+      copyright: Diputación de Badajoz, %{year}
       description: Este portal usa la %{consul} que es %{open_source}.
       faq: Asistencia técnica
       open_data_text: Todos los datos del Ayuntamiento son tuyos.
@@ -213,7 +213,7 @@ es:
       privacy: Política de privacidad
       transparency_text: Obtén cualquier información sobre la ciudad.
       transparency_title: Transparencia
-      transparency_url: https://transparency.consul
+      transparency_url: http://www.dip-badajoz.es/transparencia/
     header:
       administration_menu: Admin
       administration: Administración
@@ -224,7 +224,7 @@ es:
       external_link_opendata: Datos abiertos
       external_link_opendata_url: https://opendata.consul
       external_link_transparency: Transparencia
-      external_link_transparency_url: https://transparency.consul
+      external_link_transparency_url: http://www.dip-badajoz.es/transparencia/
       locale: 'Idioma:'
       logo: Logo de CONSUL
       management: Gestión
