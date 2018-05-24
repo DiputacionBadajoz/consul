@@ -222,4 +222,7 @@ namespace :admin do
     resources :cards
     resources :feeds, only: [:update]
   end
+
+  resources :tenants, only: [:index, :new, :create, :edit, :update, :destroy]
+  get 'tenants/switch/:subdomain', to: 'tenants#switch'
 end

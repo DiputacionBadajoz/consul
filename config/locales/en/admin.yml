@@ -319,7 +319,7 @@ en:
       index:
         back: Go back to %{org}
         title: Administration
-        description: Welcome to the %{org} admin panel.
+        description: Welcome to the (%{org} Tenant) admin panel.
     debates:
       index:
         filter: Filter
@@ -585,6 +585,7 @@ en:
       title_booths: Voting booths
       legislation: Collaborative Legislation
       users: Users
+      multitenancy: Multitenancy
     administrators:
       index:
         title: Administrators
@@ -1402,3 +1403,32 @@ en:
     translations:
         remove_language: Remove language
         add_language: Add language
+    tenants:
+      title: "Tenant:"
+      available_tenants: Available tenants
+      index:
+        title: Multitenancy
+        create: Create tenant
+        edit: Edit
+        delete: Delete
+      tenant:
+        name: Tenant name
+        title: Site Title
+        subdomain: Subdomain
+        postal_code: Postal code
+      delete:
+        success: Tenant deleted successfully
+        error: Tenant couldn't be deleted
+      new:
+        back: Go back
+        creating: New tenant
+      edit:
+        form:
+          submit_button: Save changes
+        editing: Edit tenant
+        back: Go back
+      errors:
+        form:
+          error:
+            one: "error prevented this tenant from being saved"
+            other: 'errors prevented this tenant from being saved'

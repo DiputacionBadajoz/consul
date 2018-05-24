@@ -96,6 +96,8 @@ module Abilities
       can [:create, :destroy], DirectUpload
 
       can [:deliver], Newsletter, hidden_at: nil
+
+      can [:index, :create, :edit, :update, :destroy, :switch], Tenant
     end
   end
 end
