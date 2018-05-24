@@ -371,7 +371,7 @@ es:
       index:
         back: Volver a %{org}
         title: Administración
-        description: Bienvenido al panel de administración de %{org}.
+        description: Bienvenido al panel de administración de la Entidad %{org}.
     debates:
       index:
         filter: Filtro
@@ -653,6 +653,7 @@ es:
       title_booths: Urnas de votación
       legislation: Legislación colaborativa
       users: Usuarios
+      multitenancy: Multientidad
     administrators:
       index:
         title: Administradores
@@ -1492,3 +1493,32 @@ es:
     translations:
       remove_language: Eliminar idioma
       add_language: Añadir idioma
+    tenants:
+      title: "Entidad:"
+      available_tenants: Entidades disponibles
+      index:
+        title: Multientidad
+        create: Crear entidad
+        edit: Editar
+        delete: Borrar
+      tenant:
+        name: Nombre de la entidad
+        title: Título del sitio
+        subdomain: Subdominio
+        postal_code: Código postal
+      delete:
+        success: Entidad borrada correctamente
+        error: No se puede borrar la entidad
+      new:
+        back: Volver
+        creating: Nueva entidad
+      edit:
+        form:
+          submit_button: Guardar cambios
+        editing: Editar entidad
+        back: Volver
+      errors:
+        form:
+          error:
+            one: "error impidió guardar la entidad"
+            other: 'errores impidieron guardar la entidad.'

@@ -1,0 +1,29 @@
+<%= form_for [:admin, @tenant] do |f| %>
+
+  <%= render 'errors' %>
+
+  <div clas="row">
+    <div class="small-12 medium-6 large-4 column">
+      <%= f.label :name, t("admin.tenants.tenant.name") %>
+      <%= f.text_field :name, label: false %>
+    </div>
+    <div class="small-12 medium-6 large-4 column">
+      <%= f.label :title, t("admin.tenants.tenant.title") %>
+      <%= f.text_field :title, label: false %>
+    </div>
+    <div class="small-12 medium-6 large-2 column">
+      <%= f.label :subdomain, t("admin.tenants.tenant.subdomain") %>
+      <%= f.text_field :subdomain, label: false %>
+    </div>
+    <div class="small-12 medium-6 large-2 column">
+      <%= f.label :postal_code, t("admin.tenants.tenant.postal_code") %>
+      <%= f.text_field :postal_code, label: false %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="actions small-12 large-3 medium-3 column">
+      <%= f.submit(class: "button success expanded", value: t("admin.tenants.edit.form.submit_button")) %>
+    </div>
+  </div>
+<% end %>
