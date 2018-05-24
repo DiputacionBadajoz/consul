@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320104823) do
+ActiveRecord::Schema.define(version: 20180502075740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1044,6 +1044,15 @@ ActiveRecord::Schema.define(version: 20180320104823) do
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
   add_index "tags", ["proposals_count"], name: "index_tags_on_proposals_count", using: :btree
   add_index "tags", ["spending_proposals_count"], name: "index_tags_on_spending_proposals_count", using: :btree
+
+  create_table "tenants", force: :cascade do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "subdomain"
+    t.string   "postal_code"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "topics", force: :cascade do |t|
     t.string   "title",                      null: false

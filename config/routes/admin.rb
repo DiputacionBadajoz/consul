@@ -179,4 +179,7 @@ namespace :admin do
     resources :images, only: [:index, :update, :destroy]
     resources :content_blocks, except: [:show]
   end
+
+  resources :tenants, only: [:index, :new, :create, :edit, :update, :destroy]
+  get 'tenants/switch/:subdomain', to: 'tenants#switch'
 end
