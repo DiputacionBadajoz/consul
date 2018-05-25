@@ -77,6 +77,7 @@
 //= require investment_report_alert
 //= require send_newsletter_alert
 //= require managers
+//= require globalize
 //= require tenants
 
 var initialize_modules = function() {
@@ -122,6 +123,7 @@ var initialize_modules = function() {
   App.InvestmentReportAlert.initialize();
   App.SendNewsletterAlert.initialize();
   App.Managers.initialize();
+  App.Globalize.initialize();
   App.Tenants.initialize();
 };
 

@@ -118,6 +118,18 @@ ActiveRecord::Schema.define(version: 20180502075740) do
 
   add_index "budget_headings", ["group_id"], name: "index_budget_headings_on_group_id", using: :btree
 
+  create_table "budget_investment_milestone_translations", force: :cascade do |t|
+    t.integer  "budget_investment_milestone_id", null: false
+    t.string   "locale",                         null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "title"
+    t.text     "description"
+  end
+
+  add_index "budget_investment_milestone_translations", ["budget_investment_milestone_id"], name: "index_6770e7675fe296cf87aa0fd90492c141b5269e0b", using: :btree
+  add_index "budget_investment_milestone_translations", ["locale"], name: "index_budget_investment_milestone_translations_on_locale", using: :btree
+
   create_table "budget_investment_milestones", force: :cascade do |t|
     t.integer  "investment_id"
     t.string   "title",            limit: 80
@@ -162,6 +174,7 @@ ActiveRecord::Schema.define(version: 20180502075740) do
     t.boolean  "winner",                                      default: false
     t.boolean  "incompatible",                                default: false
     t.integer  "community_id"
+    t.boolean  "visible_to_valuators",                        default: false
     t.integer  "valuator_group_assignments_count",            default: 0
   end
 
