@@ -90,6 +90,7 @@ Setting['feature.map'] = nil
 Setting['feature.allow_images'] = true
 Setting['feature.allow_attached_documents'] = true
 Setting['feature.guides'] = nil
+Setting["feature.user.skip_verification"] = true
 
 # Spending proposals feature flags
 Setting['feature.spending_proposal_features.voting_allowed'] = nil
@@ -126,5 +127,3 @@ Setting['map_zoom'] = 10
 
 # Related content
 Setting['related_content_score_threshold'] = -0.3
-
-Setting["feature.user.skip_verification"] = true
