@@ -1,0 +1,104 @@
+<% if feature?(:twitter_login) || feature?(:facebook_login) || feature?(:google_login) %>
+
+  <% if current_page?(new_user_session_path) %>
+    <div class="row">
+      <div class="small-12 column">
+        <div class="margin-bottom">
+          <strong><%= t("omniauth.info_sign_in") %></strong>
+        </div>
+      </div>
+
+      <% if feature? :twitter_login %>
+        <div class="small-12 medium-6 large-4 column end">
+          <%= link_to t("omniauth.twitter.name"), user_omniauth_authorize_path(:twitter),
+                      title: t("omniauth.twitter.sign_in"),
+                      class: "button-twitter button expanded" %>
+        </div>
+      <% end %>
+
+      <% if feature? :facebook_login %>
+        <div class="small-12 medium-6 large-4 column end">
+          <%= link_to t("omniauth.facebook.name"), user_omniauth_authorize_path(:facebook),
+                      title: t("omniauth.facebook.sign_in"),
+                      class: "button-facebook button expanded" %>
+        </div>
+      <% end %>
+
+      <% if feature? :google_login %>
+        <div class="small-12 medium-6 large-4 column end">
+          <%= link_to t("omniauth.google_oauth2.name"), user_omniauth_authorize_path(:google_oauth2),
+                      title: t("omniauth.google_oauth2.sign_in"),
+                      class: "button-google button expanded" %>
+        </div>
+      <% end %>
+
+      <div class="small-12 column auth-divider">
+        <span><%= t("omniauth.or_fill") %></span>
+      </div>
+    </div>
+
+  <% elsif current_page?(new_user_registration_path) %>
+    <div class="row">
+      <div class="small-12 column">
+        <div class="margin-bottom">
+          <strong><%= t("omniauth.info_sign_up") %></strong>
+        </div>
+      </div>
+
+      <% if feature? :twitter_login %>
+        <div class="small-12 medium-6 large-4 column end">
+          <%= link_to t("omniauth.twitter.name"), user_omniauth_authorize_path(:twitter),
+                      title: t("omniauth.twitter.sign_up"),
+                      class: "button-twitter button expanded" %>
+        </div>
+      <% end %>
+
+      <% if feature? :facebook_login %>
+        <div class="small-12 medium-6 large-4 column end">
+          <%= link_to t("omniauth.facebook.name"), user_omniauth_authorize_path(:facebook),
+                      title: t("omniauth.facebook.sign_up"),
+                      class: "button-facebook button expanded" %>
+        </div>
+      <% end %>
+
+      <% if feature? :google_login %>
+        <div class="small-12 medium-6 large-4 column end">
+          <%= link_to t("omniauth.google_oauth2.name"), user_omniauth_authorize_path(:google_oauth2),
+                      title: t("omniauth.google_oauth2.sign_up"),
+                      class: "button-google button expanded" %>
+        </div>
+      <% end %>
+
+      <div class="small-12 column auth-divider">
+        <span><%= t("omniauth.or_fill") %></span>
+      </div>
+    </div>
+  <% end %>
+
+<% end %>
+
+<% if feature? :ldap_login %>
+  <div class="row">
+    <div class="small-12 column">
+      <div class="margin-bottom">
+        <strong><%= t("omniauth.session.new.ldap.info_sign_in") %></strong>
+      </div>
+    </div>
+
+    <%= form_tag user_omniauth_callback_path(:ldap) do %>
+      <div class="small-12 column">
+        <label for='username'><%= t("omniauth.session.new.ldap.login_label") %></label>
+        <input type='text' id='username' name='username' placeholder='<%= t("omniauth.session.new.ldap.login_label") %>'/>
+      </div>
+      <div class="small-12 column">
+        <label for='password'><%= t("omniauth.session.new.ldap.password_label") %></label>
+        <input type='password' id='password' name='password' placeholder='<%= t("omniauth.session.new.ldap.password_label") %>'/>
+      </div>
+      <div class="small-12 medium-6 small-centered">
+        <button class="button expanded" type='submit'>
+          <%= t("omniauth.session.new.ldap.submit") %>
+        </button>
+      </div>
+    <% end %>
+  </div>
+<% end %>

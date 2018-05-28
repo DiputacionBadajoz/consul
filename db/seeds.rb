@@ -77,6 +77,7 @@ Setting['feature.polls'] = true
 Setting['feature.twitter_login'] = true
 Setting['feature.facebook_login'] = true
 Setting['feature.google_login'] = true
+Setting['feature.ldap_login'] = true
 Setting['feature.public_stats'] = true
 Setting['feature.budgets'] = true
 Setting['feature.signature_sheets'] = true
@@ -124,4 +125,4 @@ Setting['map_zoom'] = 10
 # Related content
 Setting['related_content_score_threshold'] = -0.3
 
-Setting["feature.user.skip_verification"] = 'true'
+Setting["feature.user.skip_verification"] = true

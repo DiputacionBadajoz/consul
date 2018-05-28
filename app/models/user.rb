@@ -85,7 +85,8 @@ class User < ActiveRecord::Base
       oauth_email: oauth_email,
       password: Devise.friendly_token[0, 20],
       terms_of_service: '1',
-      confirmed_at: oauth_email_confirmed ? DateTime.current : nil
+      confirmed_at: oauth_email_confirmed ? DateTime.current : nil,
+      registering_with_oauth: true
     )
   end
 
@@ -261,7 +262,7 @@ class User < ActiveRecord::Base
   end
 
   def email_required?
-    !erased? && unverified?
+    !erased? && ((!registering_with_oauth && unverified?) || (registering_with_oauth && email.blank?))
   end
 
   def locale

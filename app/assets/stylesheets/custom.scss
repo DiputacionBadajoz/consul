@@ -3,3 +3,72 @@
 // * English: https://github.com/consul/consul/blob/master/CUSTOMIZE_EN.md#css
 // * Spanish: https://github.com/consul/consul/blob/master/CUSTOMIZE_ES.md#css
 //
+
+header {
+  background-color: #FFFFFF;
+}
+
+.top-links {
+  background-color: #CC0000 !important;
+}
+.top-bar {
+  background-color: #FFFFFF !important;
+}
+.top-bar-title a {
+  color: #000000 !important;
+}
+.top-bar-right a {
+  color: #000000 !important;
+}
+
+footer {
+  background-color: #CC0000;
+  color: #FFFFFF;
+}
+footer a {
+  color: #FFFFFF;
+}
+
+.footer {
+  background-color: #CC0000;
+  border-top: 1px solid #999999;
+}
+
+.subnavigation a:hover {
+    color: #CC0000;
+}
+
+.subnavigation a.active {
+    border-bottom: 2px solid #CC0000;
+    color: #CC0000;
+}
+
+.submenu a:hover {
+    color: #CC0000;
+}
+
+.submenu .active {
+    border-bottom: 2px solid #CC0000;
+    color: #CC0000;
+}
+
+.top-bar .menu > li .button {
+    background: #CC0000;
+    color: #fff !important;
+    text-align: center;
+}
+
+.button {
+    background: #CC0000;
+    /*background-color: rgb(0, 74, 131);*/
+    font-size: 1.0625rem;
+}
+
+.button:hover, .button:focus {
+    background-color: #D94444;
+    color: #fff;
+}
+
+.highlight {
+    background: #c4c4c4;
+}

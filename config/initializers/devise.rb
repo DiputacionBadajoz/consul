@@ -246,6 +246,14 @@ Devise.setup do |config|
   config.omniauth :twitter, Rails.application.secrets.twitter_key, Rails.application.secrets.twitter_secret
   config.omniauth :facebook, Rails.application.secrets.facebook_key, Rails.application.secrets.facebook_secret, scope: 'email', info_fields: 'email,name,verified'
   config.omniauth :google_oauth2, Rails.application.secrets.google_oauth2_key, Rails.application.secrets.google_oauth2_secret
+  config.omniauth :ldap,
+        :host => 'localhost',
+        :base => 'ou=usuarios,dc=portafirmas,dc=es',
+        :uid => 'uid',
+        :port => 389,
+        :method => :plain
+        #:bind_dn => THE_FULL_DN_OF_THE_USER_YOU_WILL_BIND_WITH',
+        #:password => 'THE_PASSWORD_OF_THE_BIND_USER'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

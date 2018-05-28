@@ -33,7 +33,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def finish_signup
-    current_user.registering_with_oauth = false
     current_user.email = current_user.oauth_email if current_user.email.blank?
     current_user.validate
   end
