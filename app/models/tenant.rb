@@ -91,6 +91,7 @@ class Tenant < ActiveRecord::Base
       Setting['feature.twitter_login'] = true
       Setting['feature.facebook_login'] = true
       Setting['feature.google_login'] = true
+      Setting['feature.ldap_login'] = true
       Setting['feature.public_stats'] = true
       Setting['feature.budgets'] = true
       Setting['feature.signature_sheets'] = true
@@ -101,6 +102,7 @@ class Tenant < ActiveRecord::Base
       Setting['feature.allow_images'] = true
       Setting['feature.allow_attached_documents'] = true
       Setting['feature.guides'] = nil
+      Setting["feature.user.skip_verification"] = false
 
       # Spending proposals feature flags
       Setting['feature.spending_proposal_features.voting_allowed'] = nil
