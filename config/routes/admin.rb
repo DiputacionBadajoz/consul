@@ -182,4 +182,10 @@ namespace :admin do
 
   resources :tenants, only: [:index, :new, :create, :edit, :update, :destroy]
   get 'tenants/switch/:subdomain', to: 'tenants#switch'
+  resource :homepage, controller: :homepage, only: [:show]
+
+  namespace :widget do
+    resources :cards
+    resources :feeds, only: [:update]
+  end
 end
