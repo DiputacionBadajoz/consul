@@ -5,11 +5,12 @@ class Verification::ResidenceController < ApplicationController
   skip_authorization_check
 
   def new
-    @residence = Verification::Residence.new
+    @residence = Verification::Residence.new()
   end
 
   def create
     @residence = Verification::Residence.new(residence_params.merge(user: current_user))
+    @residence.set_tenant(Tenant.find_by(subdomain: Apartment::Tenant.current))
     if @residence.save
       redirect_to verified_user_path, notice: t('verification.residence.create.flash.success')
     else

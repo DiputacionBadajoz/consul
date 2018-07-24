@@ -1334,8 +1334,13 @@ ActiveRecord::Schema.define(version: 20190103132925) do
     t.string   "title"
     t.string   "subdomain"
     t.string   "postal_code"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "user_census"
+    t.string   "password_census"
+    t.integer  "entity_census"
+    t.integer  "organization_census"
+    t.string   "endpoint_census"
   end
 
   create_table "topics", force: :cascade do |t|

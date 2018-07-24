@@ -21,6 +21,35 @@
     </div>
   </div>
 
+  <h2><%= t("admin.tenants.ws_census") %></h2>
+
+  <div class="row">
+    <div class="small-12 medium-6 column">
+      <%= f.label :endpoint_census, t("admin.tenants.tenant.endpoint_census") %>
+      <%= f.text_field :endpoint_census, label: false %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 medium-6 column">
+      <%= f.label :user_census, t("admin.tenants.tenant.user_census") %>
+      <%= f.text_field :user_census, label: false %>
+    </div>
+    <div class="small-12 medium-6 column">
+      <%= f.label :password_census, t("admin.tenants.tenant.password_census") %>
+      <%= f.text_field :password_census, label: false %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 medium-6 large-2 column">
+      <%= f.label :entity_census, t("admin.tenants.tenant.entity_census") %>
+      <%= f.text_field :entity_census, label: false %>
+    </div>
+    <div class="small-12 medium-6 large-2 column">
+      <%= f.label :organization_census, t("admin.tenants.tenant.organization_census") %>
+      <%= f.text_field :organization_census, label: false %>
+    </div>
+  </div>
+
   <div class="row">
     <div class="actions small-12 large-3 medium-3 column">
       <%= f.submit(class: "button success expanded", value: t("admin.tenants.edit.form.submit_button")) %>
