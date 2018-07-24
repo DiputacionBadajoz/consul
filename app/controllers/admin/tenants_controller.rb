@@ -44,6 +44,6 @@ class Admin::TenantsController < Admin::BaseController
   private
 
     def tenant_params
-      params.require(:tenant).permit(:name, :title, :subdomain, :postal_code)
+      params.require(:tenant).permit(:name, :title, :subdomain, :postal_code, :user_census, :password_census, :entity_census, :organization_census, :endpoint_census)
     end
 end

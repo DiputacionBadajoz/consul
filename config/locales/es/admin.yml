@@ -1225,6 +1225,7 @@ es:
     tenants:
       title: "Entidad:"
       available_tenants: Entidades disponibles
+      ws_census: Servicio Web Padrón
       index:
         title: Multientidad
         create: Crear entidad
@@ -1235,6 +1236,11 @@ es:
         title: Título del sitio
         subdomain: Subdominio
         postal_code: Código postal
+        endpoint_census: Endpoint Servicio Web
+        user_census: Usuario
+        password_census: Contraseña
+        entity_census: ID Entidad
+        organization_census: ID Organización
       delete:
         success: Entidad borrada correctamente
         error: No se puede borrar la entidad

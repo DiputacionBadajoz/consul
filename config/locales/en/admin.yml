@@ -1225,6 +1225,7 @@ en:
     tenants:
       title: "Tenant:"
       available_tenants: Available tenants
+      ws_census: Census Web Service
       index:
         title: Multitenancy
         create: Create tenant
@@ -1235,6 +1236,11 @@ en:
         title: Site Title
         subdomain: Subdomain
         postal_code: Postal code
+        endpoint_census: Web Service Endpoint
+        user_census: User
+        password_census: Password
+        entity_census: Entity ID
+        organization_census: Organization ID
       delete:
         success: Tenant deleted successfully
         error: Tenant couldn't be deleted
