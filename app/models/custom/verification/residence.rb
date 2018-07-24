@@ -20,11 +20,19 @@ class Verification::Residence
     end
   end
 
+  def set_tenant(tenant)
+    @tenant = tenant
+  end
+
   private
 
+    def residency_valid?
+      @census_data.valid? && @census_data.encontrado?
+    end
+
     def valid_postal_code?
-      tenant = Tenant.find_by(subdomain: Apartment::Tenant.current)
-      postal_code =~ /^#{tenant.postal_code}/
+      #tenant = Tenant.find_by(subdomain: Apartment::Tenant.current)
+      postal_code =~ /^#{@tenant.postal_code}/
     end
 
 end
