@@ -1441,12 +1441,16 @@ ActiveRecord::Schema.define(version: 20181016204729) do
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Applied scheme changes by migration
   create_table "web_sections", force: :cascade do |t|
     t.text     "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
   create_table "widget_card_translations", force: :cascade do |t|
     t.integer  "widget_card_id", null: false
     t.string   "locale",         null: false
@@ -1463,6 +1467,8 @@ ActiveRecord::Schema.define(version: 20181016204729) do
 
 =======
 >>>>>>> Added census data to tenant
+=======
+>>>>>>> Applied scheme changes by migration
   create_table "widget_cards", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
