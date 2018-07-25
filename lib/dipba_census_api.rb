@@ -9,7 +9,6 @@ class DipbaCensusApi
     response = nil
     get_document_number_variants(document_type, document_number).each do |variant|
       response = Response.new(get_response_body(document_type, variant, birth_date))
-      puts response
       return response if response.valid?
     end
     response
@@ -31,7 +30,7 @@ class DipbaCensusApi
     private
 
       def data
-        @body[:servicio_response][:servicio_return]
+        Hash.from_xml(@body[:servicio_response][:servicio_return])
       end
   end
 
@@ -54,8 +53,9 @@ class DipbaCensusApi
       user = @tenant['user_census']
       nonce = generate_nonce()
       token = generate_token(actualDate, nonce, 'llave1')
-      document = Base64.encode64(document_number)
-      password = Base64.encode64(Digest::SHA1.digest(@tenant['password_census'])).delete("\n").delete("\r")
+      document = remove_new_lines(Base64.encode64(document_number))
+      password = remove_new_lines(Base64.encode64(Digest::SHA1.digest(@tenant['password_census'])))
+      formatted_birth_date = birth_date.strftime("%Y%m%d%H%M%S")
 
       request = {
         ope: {
@@ -66,18 +66,18 @@ class DipbaCensusApi
         },
         sec: {
           cli: "ACCEDE",
-          org: org,
-          ent: ent,
+          org: "#{org}",
+          ent: "#{ent}",
           usu: user,
           pwd: password,
           fecha: actualDate,
-          nonce: nonce,
+          nonce: "#{nonce}",
           token: token
         },
         par: {
           codigoTipoDocumento: document_type,
           documento: document,
-          fechaNacimiento: birth_date
+          fechaNacimiento: "#{formatted_birth_date}"
         }
       }
       request = request.to_xml(:root => "e")
@@ -85,7 +85,6 @@ class DipbaCensusApi
     end
 
     def end_point_available?
-      #Rails.env.staging? || Rails.env.preproduction? || Rails.env.production?
       !(@tenant['endpoint_census'].nil? || @tenant['endpoint_census'].empty?)
     end
 
@@ -93,8 +92,12 @@ class DipbaCensusApi
       document_type.to_s == "1"
     end
 
+    def remove_new_lines(string)
+      string.delete("\n").delete("\r")
+    end
+
     def encrypt_token(token)
-      Base64.encode64(Digest::SHA512.digest(token)).delete("\n").delete("\r")
+      remove_new_lines(Base64.encode64(Digest::SHA512.digest(token)))
     end
 
     def generate_nonce()
