@@ -319,7 +319,8 @@
 .legislation-process-new,
 .legislation-process-edit,
 .milestone-new,
-.milestone-edit {
+.milestone-edit,
+.image-form {
   @include direct-uploads;
 }
 
@@ -624,6 +625,15 @@
       }
     }
   }
+}
+
+.milestone-status {
+  background: $budget;
+  border-radius: rem-calc(4);
+  color: #fff;
+  display: inline-block;
+  margin-top: $line-height / 6;
+  padding: $line-height / 4 $line-height / 2;
 }
 
 .show-actions-menu {
@@ -1349,14 +1359,17 @@
       text-decoration: none;
     }
 
-    a,
-    div {
+    a {
       display: block;
       padding: $line-height / 2;
 
       &:hover {
         text-decoration: none;
       }
+    }
+
+    .heading-name {
+      padding: $line-height / 2;
     }
 
     span {
@@ -1535,7 +1548,7 @@
   padding: $line-height / 4;
 }
 
-.select-district .active a {
+.select-district .is-active a {
   background: #f9f9f9;
   border-radius: rem-calc(3);
   color: $budget;
@@ -1628,7 +1641,7 @@
       z-index: 99;
     }
 
-    &.active {
+    &.is-active {
 
       h3 {
         background: $budget;

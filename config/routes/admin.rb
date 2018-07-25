@@ -38,6 +38,13 @@ namespace :admin do
     get :summary, on: :collection
   end
 
+  resources :proposal_notifications, only: :index do
+    member do
+      put :restore
+      put :confirm_hide
+    end
+  end
+
   resources :budgets do
     member do
       put :calculate_winners
@@ -54,6 +61,8 @@ namespace :admin do
 
     resources :budget_phases, only: [:edit, :update]
   end
+
+  resources :budget_investment_statuses, only: [:index, :new, :create, :update, :edit, :destroy]
 
   resources :signature_sheets, only: [:index, :new, :create, :show]
 
@@ -182,4 +191,10 @@ namespace :admin do
 
   resources :tenants, only: [:index, :new, :create, :edit, :update, :destroy]
   get 'tenants/switch/:subdomain', to: 'tenants#switch'
+  resource :homepage, controller: :homepage, only: [:show]
+
+  namespace :widget do
+    resources :cards
+    resources :feeds, only: [:update]
+  end
 end
