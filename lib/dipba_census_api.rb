@@ -59,13 +59,13 @@ class DipbaCensusApi
 
       request = {
         ope: {
-          apl: "PAD",
-          tobj: "HAB",
-          cmd: "CEN",
-          ver: "2.0"
+          apl: "",
+          tobj: "",
+          cmd: "",
+          ver: ""
         },
         sec: {
-          cli: "ACCEDE",
+          cli: "",
           org: "#{org}",
           ent: "#{ent}",
           usu: user,
