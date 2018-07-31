@@ -240,20 +240,13 @@
       </ul>
     </li>
 
-    <% if Apartment::Tenant.current == "public" %>
-      <li class="section-title <%= "active" if controller_name == "tenants" && controller.action_name != "switch" %>">
+    <% if admin_main_tenant? %>
+      <li <%= "class=is-active" if controller_name == "tenants" && controller.action_name != "switch" %>>
         <%= link_to admin_tenants_path do %>
           <span class="icon-organizations"></span>
           <strong><%= t('admin.menu.multitenancy') %></strong>
         <% end %>
       </li>
     <% end %>
-
-    <li class="section-title <%= "active" if controller_name == "geozones" %>">
-      <%= link_to admin_geozones_path do %>
-        <span class="icon-map-marker"></span>
-        <strong><%= t('admin.menu.geozones') %></strong>
-      <% end %>
-    </li>
   </ul>
 </div>
