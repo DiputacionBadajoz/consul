@@ -34,6 +34,7 @@ class Poll
 
       self.document_type   = user.document_type
       self.document_number = user.document_number
+      self.date_of_birth = user.date_of_birth
     end
 
     private
@@ -43,7 +44,7 @@ class Poll
       end
 
       def census_api_response
-        @census_api_response ||= CensusCaller.new.call(document_type, document_number)
+        @census_api_response ||= CensusCaller.new.call(Tenant.find_by(subdomain: Apartment::Tenant.current), document_type, document_number, date_of_birth)
       end
 
       def fill_stats_fields

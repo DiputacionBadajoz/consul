@@ -1508,6 +1508,7 @@ en:
         create: Create tenant
         edit: Edit
         delete: Delete
+        multitenant: Multi-Tenant
       tenant:
         name: Tenant name
         title: Site Title

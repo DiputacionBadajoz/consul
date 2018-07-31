@@ -1502,6 +1502,7 @@ es:
         create: Crear entidad
         edit: Editar
         delete: Borrar
+        multitenant: Multi-Entidad
       tenant:
         name: Nombre de la entidad
         title: Título del sitio

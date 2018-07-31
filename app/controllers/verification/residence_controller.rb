@@ -5,7 +5,7 @@ class Verification::ResidenceController < ApplicationController
   skip_authorization_check
 
   def new
-    @residence = Verification::Residence.new()
+    @residence = Verification::Residence.new
   end
 
   def create
