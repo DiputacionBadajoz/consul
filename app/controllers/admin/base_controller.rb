@@ -20,7 +20,7 @@ class Admin::BaseController < ApplicationController
     end
 
     def get_tenants
-      @tenants = Tenant.all.order("LOWER(subdomain)")
+      @tenants = Tenant.all.order("LOWER(name)")
     end
 
 end

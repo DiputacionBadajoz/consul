@@ -13,7 +13,7 @@
     </div>
     <div class="small-12 medium-6 large-2 column">
       <%= f.label :subdomain, t("admin.tenants.tenant.subdomain") %>
-      <%= f.text_field :subdomain, label: false %>
+      <%= f.text_field :subdomain, label: false, :readonly => !change_subdomain?(@tenant) %>
     </div>
     <div class="small-12 medium-6 large-2 column">
       <%= f.label :postal_code, t("admin.tenants.tenant.postal_code") %>

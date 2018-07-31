@@ -88,6 +88,10 @@ module AdminHelper
     group.errors.messages.size > 0 ? "" : "display:none"
   end
 
+  def admin_main_tenant?
+    Apartment::Tenant.current == 'public'
+  end
+
   private
 
     def namespace

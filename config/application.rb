@@ -11,7 +11,7 @@ Bundler.require(*Rails.groups)
 module Consul
   class Application < Rails::Application
     config.middleware.use Apartment::Elevators::Subdomain
-    Apartment::Elevators::Subdomain.excluded_subdomains = ['www', 'consul', 'public', 'localhost']
+    Apartment::Elevators::Subdomain.excluded_subdomains = ['www', 'public', 'localhost']
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

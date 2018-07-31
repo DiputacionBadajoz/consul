@@ -250,8 +250,8 @@
       </ul>
     </li>
 
-    <% if Apartment::Tenant.current == "public" %>
-      <li class="section-title <%= "active" if controller_name == "tenants" && controller.action_name != "switch" %>">
+    <% if admin_main_tenant? %>
+      <li <%= "class=is-active" if controller_name == "tenants" && controller.action_name != "switch" %>>
         <%= link_to admin_tenants_path do %>
           <span class="icon-organizations"></span>
           <strong><%= t('admin.menu.multitenancy') %></strong>
