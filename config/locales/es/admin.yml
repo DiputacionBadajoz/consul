@@ -1513,6 +1513,10 @@ es:
         password_census: Contraseña
         entity_census: ID Entidad
         organization_census: ID Organización
+      create:
+        success: Entidad creada correctamente
+      update:
+        success: Entidad actualizada correctamente
       delete:
         success: Entidad borrada correctamente
         error: No se puede borrar la entidad

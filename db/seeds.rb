@@ -5,7 +5,9 @@ if Administrator.count == 0 && !Rails.env.test?
   admin.create_administrator
 end
 
-Tenant.create(name: 'Consul', title: 'Consul',  subdomain: 'public', postal_code: '280')
+if Apartment::Tenant.current == 'public'
+  Tenant.create(name: 'Consul', title: 'Consul',  subdomain: 'public', postal_code: '280')
+end
 
 # Names for the moderation console, as a hint for moderators
 # to know better how to assign users with official positions
@@ -137,12 +139,3 @@ Setting["feature.user.skip_verification"] = 'true'
 Setting['feature.homepage.widgets.feeds.proposals'] = true
 Setting['feature.homepage.widgets.feeds.debates'] = true
 Setting['feature.homepage.widgets.feeds.processes'] = true
-
-# Votes hot_score configuration
-Setting['hot_score_period_in_days'] = 31
-
-WebSection.create(name: 'homepage')
-WebSection.create(name: 'debates')
-WebSection.create(name: 'proposals')
-WebSection.create(name: 'budgets')
-WebSection.create(name: 'help_page')
