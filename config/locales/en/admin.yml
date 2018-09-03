@@ -1336,6 +1336,10 @@ en:
         password_census: Password
         entity_census: Entity ID
         organization_census: Organization ID
+      create:
+        success: Tenant created successfully
+      update:
+        success: Tenant updated successfully
       delete:
         success: Tenant deleted successfully
         error: Tenant couldn't be deleted

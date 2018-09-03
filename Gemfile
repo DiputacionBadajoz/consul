@@ -54,7 +54,7 @@ gem 'unicorn', '~> 5.4.0'
 gem 'whenever', '~> 0.10.0', require: false
 gem 'globalize', '~> 5.0.0'
 gem 'globalize-accessors', '~> 0.2.1'
-gem 'apartment'
+gem 'apartment', '~> 2.2'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-leaflet'
