@@ -31,7 +31,6 @@ class Verification::Residence
     end
 
     def valid_postal_code?
-      #tenant = Tenant.find_by(subdomain: Apartment::Tenant.current)
       postal_code =~ /^#{@tenant.postal_code}/
     end
 

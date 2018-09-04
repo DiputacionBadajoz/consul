@@ -1,11 +1,9 @@
 class Admin::TenantsController < Admin::BaseController
 
-  respond_to :html
-
   load_and_authorize_resource
+  helper_method :main_tenant?
 
   def index
-    #@tenants = Tenant.all.order("LOWER(subdomain)")
   end
 
   def new
@@ -18,7 +16,7 @@ class Admin::TenantsController < Admin::BaseController
     @tenant = Tenant.new(tenant_params)
 
     if @tenant.save
-      redirect_to admin_tenants_path
+      redirect_to admin_tenants_path, notice: t('admin.tenants.create.success')
     else
       render :new
     end
@@ -26,7 +24,7 @@ class Admin::TenantsController < Admin::BaseController
 
   def update
     if @tenant.update(tenant_params)
-      redirect_to admin_tenants_path
+      redirect_to admin_tenants_path, notice: t('admin.tenants.update.success')
     else
       render :edit
     end
@@ -43,7 +41,12 @@ class Admin::TenantsController < Admin::BaseController
 
   private
 
+    def main_tenant?(tenant)
+      tenant.subdomain == 'public'
+    end
+
     def tenant_params
-      params.require(:tenant).permit(:name, :title, :subdomain, :postal_code, :user_census, :password_census, :entity_census, :organization_census, :endpoint_census)
+      params.require(:tenant).permit(:name, :title, :subdomain, :postal_code,
+        :endpoint_census, :institution_code_census, :portal_name_census, :user_code_census)
     end
 end
