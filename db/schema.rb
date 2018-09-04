@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180718115545) do
+ActiveRecord::Schema.define(version: 20180727065256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -205,14 +205,11 @@ ActiveRecord::Schema.define(version: 20180718115545) do
     t.boolean  "winner",                                      default: false
     t.boolean  "incompatible",                                default: false
     t.integer  "community_id"
-    t.integer  "valuator_group_assignments_count",            default: 0
-<<<<<<< HEAD
     t.boolean  "visible_to_valuators",                        default: false
-=======
+    t.integer  "valuator_group_assignments_count",            default: 0
     t.datetime "confirmed_hide_at"
     t.datetime "ignored_flag_at"
     t.integer  "flags_count",                                 default: 0
->>>>>>> master
   end
 
   add_index "budget_investments", ["administrator_id"], name: "index_budget_investments_on_administrator_id", using: :btree
@@ -1120,13 +1117,16 @@ ActiveRecord::Schema.define(version: 20180718115545) do
     t.string   "title"
     t.string   "subdomain"
     t.string   "postal_code"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "endpoint_census"
+    t.string   "institution_code_census"
+    t.string   "portal_name_census"
+    t.string   "user_code_census"
     t.string   "user_census"
     t.string   "password_census"
     t.integer  "entity_census"
     t.integer  "organization_census"
-    t.string   "endpoint_census"
   end
 
   create_table "topics", force: :cascade do |t|
