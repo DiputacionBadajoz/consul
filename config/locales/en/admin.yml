@@ -269,8 +269,6 @@ en:
         show_image: "Show image"
         documents: "Documents"
       form:
-        add_language: Add language
-        remove_language: Remove language
         admin_statuses: Admin investment statuses
         no_statuses_defined: There are no defined investment statuses yet
       new:
@@ -374,7 +372,7 @@ en:
           enabled: Enabled
           process: Process
           debate_phase: Debate phase
-          allegations_phase: Drafting phase
+          allegations_phase: Comments phase
           proposals_phase: Proposals phase
           start: Start
           end: End
@@ -396,6 +394,12 @@ en:
           back: Back
           title: Create new collaborative legislation process
           submit_button: Create process
+        proposals:
+          select_order: Sort by
+          orders:
+            id: Id
+            title: Title
+            supports: Supports
         process:
           title: Process
           comments: Comments
@@ -413,6 +417,11 @@ en:
         index:
           title: Proposals
           back: Back
+          id: Id
+          title: Title
+          supports: Supports
+          select: Select
+          selected: Selected
         form:
           custom_categories: Categories
           custom_categories_description: Categories that users can select creating the proposal.
@@ -561,7 +570,6 @@ en:
           layouts: "Layouts"
           mailers: "Emails"
           management: "Management"
-          guides: "Guides"
           welcome: "Welcome"
         buttons:
           save: "Save"
@@ -633,6 +641,9 @@ en:
         title: Newsletter preview
         send: Send
         affected_users: (%{n} affected users)
+        sent_emails:
+          one: 1 email sent
+          other: "%{count} emails sent"
         sent_at: Sent at
         subject: Subject
         segment_recipient: Recipients
@@ -660,8 +671,10 @@ en:
         empty_notifications: There are no notifications to show
       new:
         section_title: New notification
+        submit_button: Create notification
       edit:
         section_title: Edit notification
+        submit_button: Update notification
       show:
         section_title: Notification preview
         send: Send notification
@@ -1306,6 +1319,11 @@ en:
         content_block:
           body: Body
           name: Name
+          names:
+            top_links: Top Links
+            footer: Footer
+            subnavigation_left: Main Navigation Left
+            subnavigation_right: Main Navigation Right
       images:
         index:
           title: Custom images
@@ -1344,11 +1362,11 @@ en:
         page:
           created_at: Created at
           status: Status
-          title: Title
           updated_at: Updated at
           status_draft: Draft
           status_published: Published
-          locale: Language
+          title: Title
+          slug: Slug
     homepage:
       title: Homepage
       description: The active modules appear in the homepage in the same order as here.
@@ -1377,3 +1395,6 @@ en:
         submit_header: Save header
         card_title: Edit card
         submit_card: Save card
+    translations:
+        remove_language: Remove language
+        add_language: Add language

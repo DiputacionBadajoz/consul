@@ -47,8 +47,8 @@ section "Creating Settings" do
   Setting.create(key: 'feature.allow_images', value: "true")
   Setting.create(key: 'feature.allow_attached_documents', value: "true")
   Setting.create(key: 'feature.public_stats', value: "true")
-  Setting.create(key: 'feature.guides', value: nil)
   Setting.create(key: 'feature.user.skip_verification', value: "true")
+  Setting.create(key: 'feature.help_page', value: "true")
 
   Setting.create(key: 'per_page_code_head', value: "")
   Setting.create(key: 'per_page_code_body', value: "")
@@ -56,7 +56,8 @@ section "Creating Settings" do
   Setting.create(key: 'mailer_from_name', value: 'CONSUL')
   Setting.create(key: 'mailer_from_address', value: 'noreply@consul.dev')
   Setting.create(key: 'meta_title', value: 'CONSUL')
-  Setting.create(key: 'meta_description', value: 'Citizen Participation & Open Gov Application')
+  Setting.create(key: 'meta_description', value: 'Citizen participation tool for an open, '\
+                                                 'transparent and democratic government')
   Setting.create(key: 'meta_keywords', value: 'citizen participation, open government')
   Setting.create(key: 'verification_offices_url', value: 'http://oficinas-atencion-ciudadano.url/')
   Setting.create(key: 'min_age_to_participate', value: '16')

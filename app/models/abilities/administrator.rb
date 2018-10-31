@@ -14,6 +14,10 @@ module Abilities
       can :restore, Proposal
       cannot :restore, Proposal, hidden_at: nil
 
+      can :create, Legislation::Proposal
+      can :show, Legislation::Proposal
+      can :proposals, ::Legislation::Process
+
       can :restore, Legislation::Proposal
       cannot :restore, Legislation::Proposal, hidden_at: nil
 
@@ -78,6 +82,9 @@ module Abilities
       can :manage, SiteCustomization::Page
       can :manage, SiteCustomization::Image
       can :manage, SiteCustomization::ContentBlock
+
+      can :access, :ckeditor
+      can :manage, Ckeditor::Picture
 
       can [:manage], ::Legislation::Process
       can [:manage], ::Legislation::DraftVersion
