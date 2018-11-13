@@ -129,6 +129,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_mailer_host
-      ActionMailer::Base.default_url_options[:host] = request.host_with_port
+      ActionMailer::Base.default_url_options[:host] = request.host
+      ActionMailer::Base.asset_host = request.protocol + request.host
     end
 end
