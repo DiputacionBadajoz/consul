@@ -87,6 +87,7 @@ en:
         table_edit_budget: Edit
         edit_groups: Edit headings groups
         edit_budget: Edit budget
+        no_budgets: "There are no open budgets."
       create:
         notice: New participatory budget created successfully!
       update:
@@ -337,7 +338,7 @@ en:
           without_confirmed_hide: Pending
         title: Hidden users
         user: User
-        no_hidden_users: There is no hidden users.
+        no_hidden_users: There are no hidden users.
       show:
         email: 'Email:'
         hidden_at: 'Hidden at:'
@@ -372,6 +373,8 @@ en:
           enabled: Enabled
           process: Process
           debate_phase: Debate phase
+          draft_phase: Draft phase
+          draft_phase_description: If this phase is active, the process won't be listed on processes index. Allow to preview the process and create content before the start.
           allegations_phase: Comments phase
           proposals_phase: Proposals phase
           start: Start
@@ -384,7 +387,7 @@ en:
         index:
           create: New process
           delete: Delete
-          title: Legislation processess
+          title: Legislation processes
           filters:
             open: Open
             next: Next
@@ -587,6 +590,7 @@ en:
         title: Administrators
         name: Name
         email: Email
+        id: Administrator ID
         no_administrators: There are no administrators.
       administrator:
         add: Add
@@ -986,7 +990,7 @@ en:
       index:
         title: Officials
         no_officials: There are no officials.
-        name: Nombre
+        name: Name
         official_position: Official position
         official_level: Level
       level_0: Not official
@@ -1371,11 +1375,11 @@ en:
       title: Homepage
       description: The active modules appear in the homepage in the same order as here.
       header_title: Header
-      no_header: There is no header.
+      no_header: There are no headers.
       create_header: Create header
       cards_title: Cards
       create_card: Create card
-      no_cards: There is no cards.
+      no_cards: There are no cards.
       cards:
         title: Title
         description: Description
