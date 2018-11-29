@@ -1369,8 +1369,52 @@ es:
           updated_at: Última actualización
           status_draft: Borrador
           status_published: Publicada
+<<<<<<< HEAD
           title: Título
           slug: Slug
+=======
+          locale: Idioma
+    tenants:
+      title: "Entidad:"
+      available_tenants: Entidades disponibles
+      ws_census: Servicio Web Padrón
+      index:
+        title: Multientidad
+        create: Crear entidad
+        edit: Editar
+        delete: Borrar
+        multitenant: Multi-Entidad
+      tenant:
+        name: Nombre de la entidad
+        title: Título del sitio
+        subdomain: Subdominio
+        postal_code: Código postal
+        endpoint_census: Endpoint Servicio Web
+        user_census: Usuario
+        password_census: Contraseña
+        entity_census: ID Entidad
+        organization_census: ID Organización
+      create:
+        success: Entidad creada correctamente
+      update:
+        success: Entidad actualizada correctamente
+      delete:
+        success: Entidad borrada correctamente
+        error: No se puede borrar la entidad
+      new:
+        back: Volver
+        creating: Nueva entidad
+      edit:
+        form:
+          submit_button: Guardar cambios
+        editing: Editar entidad
+        back: Volver
+      errors:
+        form:
+          error:
+            one: "error impidió guardar la entidad"
+            other: 'errores impidieron guardar la entidad.'
+>>>>>>> 6b65eaf0e6a766e11ceec242808c0b3344f64b91
     homepage:
       title: Título
       description: Los módulos activos aparecerán en la homepage en el mismo orden que aquí.

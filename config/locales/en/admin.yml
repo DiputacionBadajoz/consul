@@ -1370,8 +1370,52 @@ en:
           updated_at: Updated at
           status_draft: Draft
           status_published: Published
+<<<<<<< HEAD
           title: Title
           slug: Slug
+=======
+          locale: Language
+    tenants:
+      title: "Tenant:"
+      available_tenants: Available tenants
+      ws_census: Census Web Service
+      index:
+        title: Multitenancy
+        create: Create tenant
+        edit: Edit
+        delete: Delete
+        multitenant: Multi-Tenant
+      tenant:
+        name: Tenant name
+        title: Site Title
+        subdomain: Subdomain
+        postal_code: Postal code
+        endpoint_census: Web Service Endpoint
+        user_census: User
+        password_census: Password
+        entity_census: Entity ID
+        organization_census: Organization ID
+      create:
+        success: Tenant created successfully
+      update:
+        success: Tenant updated successfully
+      delete:
+        success: Tenant deleted successfully
+        error: Tenant couldn't be deleted
+      new:
+        back: Go back
+        creating: New tenant
+      edit:
+        form:
+          submit_button: Save changes
+        editing: Edit tenant
+        back: Go back
+      errors:
+        form:
+          error:
+            one: "error prevented this tenant from being saved"
+            other: 'errors prevented this tenant from being saved'
+>>>>>>> 6b65eaf0e6a766e11ceec242808c0b3344f64b91
     homepage:
       title: Homepage
       description: The active modules appear in the homepage in the same order as here.
