@@ -364,7 +364,48 @@ feature 'Proposal Notifications' do
       visit new_proposal_notification_path(proposal_id: proposal.id)
     end
 
-    pending "group notifications for the same proposal"
+    context "Group notifications" do
+
+      background do
+        Setting[:proposal_notification_minimum_interval_in_days] = 0
+      end
+
+      after do
+        Setting[:proposal_notification_minimum_interval_in_days] = 3
+      end
+
+      scenario "for the same proposal", :js do
+        author = create(:user)
+        user = create(:user)
+
+        proposal = create(:proposal, author: author)
+
+        create(:follow, :followed_proposal, user: user, followable: proposal)
+
+        login_as author.reload
+
+        3.times do
+          visit new_proposal_notification_path(proposal_id: proposal.id)
+
+          fill_in "Title", with: "Thank you for supporting my proposal"
+          fill_in "Message", with: "Please share it with others so we can make it happen!"
+          click_button "Send message"
+
+          expect(page).to have_content "Your message has been sent correctly."
+        end
+
+        logout
+        login_as user.reload
+        visit root_path
+
+        within("#notifications") { expect(page).to have_content :all, "You have 3 new notifications" }
+        find(".icon-notification").click
+
+        expect(page).to have_css ".notification", count: 3
+        expect(page).to have_content "There is one new notification on #{proposal.title}", count: 3
+      end
+    end
+
   end
 
   scenario "Error messages" do
@@ -381,8 +422,53 @@ feature 'Proposal Notifications' do
 
   context "Limits" do
 
-    pending "Cannot send more than one notification within established interval"
-    pending "use timecop to make sure notifications can be sent after time interval"
+    scenario "Cannot send more than one notification within established interval" do
+      author = create(:user)
+      proposal = create(:proposal, author: author)
+
+      login_as author.reload
+
+      visit new_proposal_notification_path(proposal_id: proposal.id)
+      fill_in "Title", with: "Thank you for supporting my proposal"
+      fill_in "Message", with: "Please share it with others so we can make it happen!"
+      click_button "Send message"
+
+      expect(page).to have_content "Your message has been sent correctly."
+
+      visit new_proposal_notification_path(proposal_id: proposal.id)
+      fill_in "Title", with: "Thank you again for supporting my proposal"
+      fill_in "Message", with: "Please share it again with others so we can make it happen!"
+      click_button "Send message"
+
+      expect(page).to have_content "You have to wait a minimum of 3 days between notifications"
+      expect(page).not_to have_content "Your message has been sent correctly."
+    end
+
+    scenario "Use time traveling to make sure notifications can be sent after time interval" do
+      author = create(:user)
+      proposal = create(:proposal, author: author)
+
+      login_as author.reload
+
+      visit new_proposal_notification_path(proposal_id: proposal.id)
+      fill_in "Title", with: "Thank you for supporting my proposal"
+      fill_in "Message", with: "Please share it with others so we can make it happen!"
+      click_button "Send message"
+
+      expect(page).to have_content "Your message has been sent correctly."
+
+      travel 3.days + 1.second
+
+      visit new_proposal_notification_path(proposal_id: proposal.id)
+      fill_in "Title", with: "Thank you again for supporting my proposal"
+      fill_in "Message", with: "Please share it again with others so we can make it happen!"
+      click_button "Send message"
+
+      expect(page).to have_content "Your message has been sent correctly."
+      expect(page).not_to have_content "You have to wait a minimum of 3 days between notifications"
+
+      travel_back
+    end
 
   end
 

@@ -10,12 +10,15 @@ en:
       budget/investment:
         one: "Investment"
         other: "Investments"
-      budget/investment/milestone:
+      milestone:
         one: "milestone"
         other: "milestones"
-      budget/investment/status:
-        one: "Investment status"
-        other: "Investment statuses"
+      milestone/status:
+        one: "Milestone Status"
+        other: "Milestone Statuses"
+      progress_bar:
+        one: "Progress bar"
+        other: "Progress bars"
       comment:
         one: "Comment"
         other: "Comments"
@@ -82,9 +85,6 @@ en:
       legislation/draft_versions:
         one: "Draft version"
         other: "Draft versions"
-      legislation/draft_texts:
-          one: "Draft"
-          other: "Drafts"
       legislation/questions:
         one: "Question"
         other: "Questions"
@@ -131,14 +131,21 @@ en:
         organization_name: "If you are proposing in the name of a collective/organization, or on behalf of more people, write its name"
         image: "Proposal descriptive image"
         image_title: "Image title"
-      budget/investment/milestone:
-        status_id: "Current investment status (optional)"
+      milestone:
+        status_id: "Current status (optional)"
         title: "Title"
         description: "Description (optional if there's an status assigned)"
         publication_date: "Publication date"
-      budget/investment/status:
+      milestone/status:
         name: "Name"
         description: "Description (optional)"
+      progress_bar:
+        kind: "Type"
+        title: "Title"
+        percentage: "Current progress"
+      progress_bar/kind:
+        primary: "Primary"
+        secondary: "Secondary"
       budget/heading:
         name: "Heading name"
         price: "Price"
@@ -242,6 +249,7 @@ en:
         summary: Summary
         description: Description
         additional_info: Additional info
+        milestones_summary: Summary
       legislation/draft_version:
         title: Version title
         body: Text
@@ -357,7 +365,7 @@ en:
         proposal_notification:
           attributes:
             minimum_interval:
-              invalid: "You have to wait a minium of %{interval} days between notifications"
+              invalid: "You have to wait a minimum of %{interval} days between notifications"
         signature:
           attributes:
             document_number:

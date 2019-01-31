@@ -21,7 +21,16 @@ module AdminHelper
   end
 
   def menu_moderated_content?
-    ["proposals", "debates", "comments", "hidden_users", "activity", "hidden_budget_investments"].include?(controller_name) && controller.class.parent != Admin::Legislation
+    moderated_sections.include?(controller_name) && controller.class.parent != Admin::Legislation
+  end
+
+  def moderated_sections
+    ["hidden_proposals", "debates", "comments", "hidden_users", "activity",
+     "hidden_budget_investments"]
+  end
+
+  def menu_budgets?
+    %w[budgets budget_groups budget_headings budget_investments].include?(controller_name)
   end
 
   def menu_budget?
@@ -45,11 +54,16 @@ module AdminHelper
   end
 
   def menu_customization?
-    ["pages", "banners", "information_texts"].include?(controller_name) || menu_homepage?
+    ["pages", "banners", "information_texts"].include?(controller_name) ||
+    menu_homepage? || menu_pages?
   end
 
   def menu_homepage?
-    ["homepage", "cards"].include?(controller_name)
+    ["homepage", "cards"].include?(controller_name) && params[:page_id].nil?
+  end
+
+  def menu_pages?
+    ["pages", "cards"].include?(controller_name) && params[:page_id].present?
   end
 
   def official_level_options
@@ -82,10 +96,6 @@ module AdminHelper
 
   def display_user_roles(user)
     user_roles(user).join(", ")
-  end
-
-  def display_budget_goup_form(group)
-    group.errors.messages.size > 0 ? "" : "display:none"
   end
 
   private

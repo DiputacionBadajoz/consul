@@ -47,17 +47,43 @@ feature 'Legislation' do
       end
     end
 
-    scenario 'Key dates are displayed on current locale' do
+    scenario "Processes are sorted by descending start date", :js do
+      create(:legislation_process, title: "Process 1", start_date: 3.days.ago)
+      create(:legislation_process, title: "Process 2", start_date: 2.days.ago)
+      create(:legislation_process, title: "Process 3", start_date: Date.yesterday)
+
+      visit legislation_processes_path
+
+      expect("Process 3").to appear_before("Process 2")
+      expect("Process 2").to appear_before("Process 1")
+    end
+
+    scenario 'Participation phases are displayed only if there is a phase enabled' do
+      process = create(:legislation_process, :empty)
+      process_debate = create(:legislation_process)
+
+      visit legislation_process_path(process)
+
+      expect(page).not_to have_content("Participation phases")
+
+      visit legislation_process_path(process_debate)
+
+      expect(page).to have_content("Participation phases")
+    end
+
+    scenario 'Participation phases are displayed on current locale' do
       process = create(:legislation_process, proposals_phase_start_date: Date.new(2018, 01, 01),
                                              proposals_phase_end_date: Date.new(2018, 12, 01))
 
       visit legislation_process_path(process)
 
+      expect(page).to have_content("Participation phases")
       expect(page).to have_content("Proposals")
       expect(page).to have_content("01 Jan 2018 - 01 Dec 2018")
 
       visit legislation_process_path(process, locale: "es")
 
+      expect(page).to have_content("Fases de participación")
       expect(page).to have_content("Propuestas")
       expect(page).to have_content("01 ene 2018 - 01 dic 2018")
     end
@@ -134,12 +160,45 @@ feature 'Legislation' do
     context "show" do
       include_examples "not published permissions", :legislation_process_path
 
-      scenario '#show view has document present' do
+      scenario 'show view has document present on all phases' do
         process = create(:legislation_process)
         document = create(:document, documentable: process)
+        phases = ["Debate", "Proposals", "Comments"]
+
         visit legislation_process_path(process)
 
-        expect(page).to have_content(document.title)
+        phases.each do |phase|
+          within(".legislation-process-list") do
+            find('li', :text => "#{phase}").click_link
+          end
+
+          expect(page).to have_content(document.title)
+        end
+      end
+
+      scenario 'show draft publication and final result publication dates' do
+        process = create(:legislation_process, draft_publication_date: Date.new(2019, 01, 10),
+                                               result_publication_date: Date.new(2019, 01, 20))
+
+        visit legislation_process_path(process)
+
+        within("aside") do
+          expect(page).to have_content("Draft publication")
+          expect(page).to have_content("10 Jan 2019")
+          expect(page).to have_content("Final result publication")
+          expect(page).to have_content("20 Jan 2019")
+        end
+      end
+
+      scenario 'do not show draft publication and final result publication dates if are empty' do
+        process = create(:legislation_process, :empty)
+
+        visit legislation_process_path(process)
+
+        within("aside") do
+          expect(page).not_to have_content("Draft publication")
+          expect(page).not_to have_content("Final result publication")
+        end
       end
 
       scenario 'show additional info button' do
@@ -156,7 +215,7 @@ feature 'Legislation' do
 
         visit legislation_process_path(process)
 
-        expect(page).to_not have_content("Additional information")
+        expect(page).not_to have_content("Additional information")
       end
 
       scenario "Shows another translation when the default locale isn't available" do
@@ -168,6 +227,40 @@ feature 'Legislation' do
       end
     end
 
+    context 'homepage' do
+      scenario 'enabled' do
+        process = create(:legislation_process, homepage_enabled: true,
+                                               homepage: 'This is the process homepage',
+                                               debate_start_date: Date.current + 1.day,
+                                               debate_end_date: Date.current + 2.days)
+
+        visit legislation_process_path(process)
+
+        within(".key-dates") do
+          expect(page).to have_content("Homepage")
+        end
+
+        expect(page).to     have_content("This is the process homepage")
+        expect(page).not_to have_content("Participate in the debate")
+      end
+
+      scenario 'disabled', :with_frozen_time do
+        process = create(:legislation_process, homepage_enabled: false,
+                                               homepage: 'This is the process homepage',
+                                               debate_start_date: Date.current + 1.day,
+                                               debate_end_date: Date.current + 2.days)
+
+        visit legislation_process_path(process)
+
+        within(".key-dates") do
+          expect(page).not_to have_content("Homepage")
+        end
+
+        expect(page).to have_content("This phase is not open yet")
+        expect(page).not_to have_content("This is the process homepage")
+      end
+    end
+
     context 'debate phase' do
       scenario 'not open', :with_frozen_time do
         process = create(:legislation_process, debate_start_date: Date.current + 1.day, debate_end_date: Date.current + 2.days)
@@ -175,7 +268,7 @@ feature 'Legislation' do
         visit legislation_process_path(process)
 
         expect(page).to     have_content("This phase is not open yet")
-        expect(page).to_not have_content("Participate in the debate")
+        expect(page).not_to have_content("Participate in the debate")
       end
 
       scenario 'open without questions' do
@@ -183,8 +276,8 @@ feature 'Legislation' do
 
         visit legislation_process_path(process)
 
-        expect(page).to_not have_content("Participate in the debate")
-        expect(page).to_not have_content("This phase is not open yet")
+        expect(page).not_to have_content("Participate in the debate")
+        expect(page).not_to have_content("This phase is not open yet")
       end
 
       scenario 'open with questions' do
@@ -197,7 +290,7 @@ feature 'Legislation' do
         expect(page).to     have_content("Question 1")
         expect(page).to     have_content("Question 2")
         expect(page).to     have_content("Participate in the debate")
-        expect(page).to_not have_content("This phase is not open yet")
+        expect(page).not_to have_content("This phase is not open yet")
       end
 
       include_examples "not published permissions", :debate_legislation_process_path
@@ -264,7 +357,7 @@ feature 'Legislation' do
     end
 
     context 'proposals phase' do
-      scenario 'not open' do
+      scenario 'not open', :with_frozen_time do
         process = create(:legislation_process, :upcoming_proposals_phase)
 
         visit legislation_process_proposals_path(process)
@@ -291,6 +384,73 @@ feature 'Legislation' do
       end
 
       include_examples "not published permissions", :legislation_process_proposals_path
+    end
+
+    context "Milestones" do
+      let(:process) { create(:legislation_process, :upcoming_proposals_phase) }
+
+      scenario "Without milestones" do
+        visit legislation_process_path(process)
+
+        within(".legislation-process-list") do
+          expect(page).not_to have_css "li.milestones"
+        end
+      end
+
+      scenario "With milestones" do
+        create(:milestone,
+               milestoneable:    process,
+               description:      "Something important happened",
+               publication_date: Date.new(2018, 3, 22)
+              )
+
+        visit legislation_process_path(process)
+
+        within(".legislation-process-list li.milestones") do
+          click_link "Following 22 Mar 2018"
+        end
+
+        within(".legislation-process-list .is-active") do
+          expect(page).to have_link "Following 22 Mar 2018"
+        end
+
+        within(".tab-milestones") do
+          expect(page).to have_content "Something important happened"
+        end
+      end
+
+      scenario "With main progress bar" do
+        create(:progress_bar, progressable: process)
+
+        visit milestones_legislation_process_path(process)
+
+        within(".tab-milestones") do
+          expect(page).to have_content "Progress"
+        end
+      end
+
+      scenario "With main and secondary progress bar" do
+        create(:progress_bar, progressable: process)
+        create(:progress_bar, :secondary, progressable: process, title: "Build laboratory")
+
+        visit milestones_legislation_process_path(process)
+
+        within(".tab-milestones") do
+          expect(page).to have_content "Progress"
+          expect(page).to have_content "Build laboratory"
+        end
+      end
+
+      scenario "No main progress bar" do
+        create(:progress_bar, :secondary, progressable: process, title: "Defeat Evil Lords")
+
+        visit milestones_legislation_process_path(process)
+
+        within(".tab-milestones") do
+          expect(page).not_to have_content "Progress"
+          expect(page).not_to have_content "Defeat Evil Lords"
+        end
+      end
     end
   end
 end

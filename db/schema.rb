@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181016204729) do
+ActiveRecord::Schema.define(version: 20190103132925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,16 @@ ActiveRecord::Schema.define(version: 20181016204729) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "budget_content_blocks", force: :cascade do |t|
+    t.integer  "heading_id"
+    t.text     "body"
+    t.string   "locale"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "budget_content_blocks", ["heading_id"], name: "index_budget_content_blocks_on_heading_id", using: :btree
+
   create_table "budget_groups", force: :cascade do |t|
     t.integer "budget_id"
     t.string  "name",                 limit: 50
@@ -152,10 +162,13 @@ ActiveRecord::Schema.define(version: 20181016204729) do
 
   create_table "budget_headings", force: :cascade do |t|
     t.integer "group_id"
-    t.string  "name",       limit: 50
-    t.integer "price",      limit: 8
+    t.string  "name",                 limit: 50
+    t.integer "price",                limit: 8
     t.integer "population"
     t.string  "slug"
+    t.boolean "allow_custom_content",            default: false
+    t.text    "latitude"
+    t.text    "longitude"
   end
 
   add_index "budget_headings", ["group_id"], name: "index_budget_headings_on_group_id", using: :btree
@@ -617,6 +630,8 @@ ActiveRecord::Schema.define(version: 20181016204729) do
     t.text     "summary"
     t.text     "description"
     t.text     "additional_info"
+    t.text     "milestones_summary"
+    t.text     "homepage"
   end
 
   add_index "legislation_process_translations", ["legislation_process_id"], name: "index_199e5fed0aca73302243f6a1fca885ce10cdbb55", using: :btree
@@ -650,6 +665,9 @@ ActiveRecord::Schema.define(version: 20181016204729) do
     t.date     "draft_start_date"
     t.date     "draft_end_date"
     t.boolean  "draft_phase_enabled",        default: false
+    t.boolean  "homepage_enabled",           default: false
+    t.text     "background_color"
+    t.text     "font_color"
   end
 
   add_index "legislation_processes", ["allegations_end_date"], name: "index_legislation_processes_on_allegations_end_date", using: :btree
@@ -780,6 +798,41 @@ ActiveRecord::Schema.define(version: 20181016204729) do
 
   add_index "map_locations", ["investment_id"], name: "index_map_locations_on_investment_id", using: :btree
   add_index "map_locations", ["proposal_id"], name: "index_map_locations_on_proposal_id", using: :btree
+
+  create_table "milestone_statuses", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "hidden_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "milestone_statuses", ["hidden_at"], name: "index_milestone_statuses_on_hidden_at", using: :btree
+
+  create_table "milestone_translations", force: :cascade do |t|
+    t.integer  "milestone_id", null: false
+    t.string   "locale",       null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "title"
+    t.text     "description"
+  end
+
+  add_index "milestone_translations", ["locale"], name: "index_milestone_translations_on_locale", using: :btree
+  add_index "milestone_translations", ["milestone_id"], name: "index_milestone_translations_on_milestone_id", using: :btree
+
+  create_table "milestones", force: :cascade do |t|
+    t.integer  "milestoneable_id"
+    t.string   "milestoneable_type"
+    t.string   "title",              limit: 80
+    t.text     "description"
+    t.datetime "publication_date"
+    t.integer  "status_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "milestones", ["status_id"], name: "index_milestones_on_status_id", using: :btree
 
   create_table "moderators", force: :cascade do |t|
     t.integer "user_id"
@@ -1036,6 +1089,26 @@ ActiveRecord::Schema.define(version: 20181016204729) do
   end
 
   add_index "polls", ["starts_at", "ends_at"], name: "index_polls_on_starts_at_and_ends_at", using: :btree
+
+  create_table "progress_bar_translations", force: :cascade do |t|
+    t.integer  "progress_bar_id", null: false
+    t.string   "locale",          null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "title"
+  end
+
+  add_index "progress_bar_translations", ["locale"], name: "index_progress_bar_translations_on_locale", using: :btree
+  add_index "progress_bar_translations", ["progress_bar_id"], name: "index_progress_bar_translations_on_progress_bar_id", using: :btree
+
+  create_table "progress_bars", force: :cascade do |t|
+    t.integer  "kind"
+    t.integer  "percentage"
+    t.integer  "progressable_id"
+    t.string   "progressable_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
 
   create_table "proposal_notifications", force: :cascade do |t|
     t.string   "title"
@@ -1449,10 +1522,13 @@ ActiveRecord::Schema.define(version: 20181016204729) do
     t.string   "link_text"
     t.string   "link_url"
     t.string   "label"
-    t.boolean  "header",      default: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.boolean  "header",                     default: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "site_customization_page_id"
   end
+
+  add_index "widget_cards", ["site_customization_page_id"], name: "index_widget_cards_on_site_customization_page_id", using: :btree
 
   create_table "widget_feeds", force: :cascade do |t|
     t.string   "kind"

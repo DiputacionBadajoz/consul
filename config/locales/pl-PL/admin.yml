@@ -223,8 +223,6 @@ pl:
         tags: Tagi
         user_tags: Tagi użytkownika
         undefined: Niezdefiniowany
-        milestone: Wydarzenie
-        new_milestone: Utwórz wydarzenie
         compatibility:
           title: Zgodność
           "true": Niezgodne
@@ -272,6 +270,8 @@ pl:
         image: "Obraz"
         show_image: "Pokaż obraz"
         documents: "Dokumenty"
+        milestone: Wydarzenie
+        new_milestone: Utwórz wydarzenie
       form:
         admin_statuses: Zarządzaj statusami inwestycyjnymi
         no_statuses_defined: Nie ma jeszcze zdefiniowanych statusów inwestycyjnych
@@ -408,7 +408,7 @@ pl:
           status_planned: Zaplanowany
         subnav:
           info: Informacje
-          draft_texts: Opracowanie
+          draft_versions: Opracowanie
           questions: Debata
           proposals: Wnioski
       proposals:
@@ -1014,7 +1014,7 @@ pl:
       search:
         title: Szukaj organizacji
         no_results: Nie znaleziono organizacji.
-    proposals:
+    hidden_proposals:
       index:
         filter: Filtr
         filters:

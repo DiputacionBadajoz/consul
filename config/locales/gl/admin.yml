@@ -220,8 +220,6 @@ gl:
         tags: Etiquetas
         user_tags: Etiquetas do usuario
         undefined: Sen definir
-        milestone: Seguimento
-        new_milestone: Crear novo seguimento
         compatibility:
           title: Compatibilidade
           "true": Incompatible
@@ -269,6 +267,8 @@ gl:
         image: "Imaxe"
         show_image: "Amosar imaxe"
         documents: "Documentos"
+        milestone: Seguimento
+        new_milestone: Crear novo seguimento
       form:
         admin_statuses: Administrar estados de investimento
         no_statuses_defined: Aínda non se definirion os estados dos investimentos
@@ -411,7 +411,7 @@ gl:
           status_planned: Planificado
         subnav:
           info: Información
-          draft_texts: Redacción
+          draft_versions: Redacción
           questions: Debate
           proposals: Propostas
       proposals:
@@ -1028,7 +1028,7 @@ gl:
       search:
         title: Buscar organizacións
         no_results: Non se atoparon organizacións.
-    proposals:
+    hidden_proposals:
       index:
         filter: Filtro
         filters:
