@@ -504,7 +504,6 @@ DEPENDENCIES
   apartment (~> 2.2)
   autoprefixer-rails (~> 8.2.0)
   browser (~> 2.5.3)
-  apartment (~> 2.2.0)
   bullet (~> 5.7.0)
   byebug (~> 10.0.0)
   cancancan (~> 2.3.0)

@@ -242,14 +242,11 @@ ActiveRecord::Schema.define(version: 20190103132925) do
     t.boolean  "winner",                                      default: false
     t.boolean  "incompatible",                                default: false
     t.integer  "community_id"
+    t.boolean  "visible_to_valuators",                        default: false
     t.integer  "valuator_group_assignments_count",            default: 0
-<<<<<<< HEAD
     t.datetime "confirmed_hide_at"
     t.datetime "ignored_flag_at"
     t.integer  "flags_count",                                 default: 0
-=======
-    t.boolean  "visible_to_valuators",                        default: false
->>>>>>> Added census data to tenant
   end
 
   add_index "budget_investments", ["administrator_id"], name: "index_budget_investments_on_administrator_id", using: :btree
@@ -1337,8 +1334,8 @@ ActiveRecord::Schema.define(version: 20190103132925) do
     t.string   "title"
     t.string   "subdomain"
     t.string   "postal_code"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.string   "user_census"
     t.string   "password_census"
     t.integer  "entity_census"
@@ -1513,17 +1510,12 @@ ActiveRecord::Schema.define(version: 20190103132925) do
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Applied scheme changes by migration
   create_table "web_sections", force: :cascade do |t|
     t.text     "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
   create_table "widget_card_translations", force: :cascade do |t|
     t.integer  "widget_card_id", null: false
     t.string   "locale",         null: false
@@ -1538,10 +1530,6 @@ ActiveRecord::Schema.define(version: 20190103132925) do
   add_index "widget_card_translations", ["locale"], name: "index_widget_card_translations_on_locale", using: :btree
   add_index "widget_card_translations", ["widget_card_id"], name: "index_widget_card_translations_on_widget_card_id", using: :btree
 
-=======
->>>>>>> Added census data to tenant
-=======
->>>>>>> Applied scheme changes by migration
   create_table "widget_cards", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
