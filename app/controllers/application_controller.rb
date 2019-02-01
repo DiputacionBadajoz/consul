@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :track_email_campaign
   before_action :set_return_url
+  before_action :set_mailer_host
 
   check_authorization unless: :devise_controller?
   self.responder = ApplicationResponder
@@ -125,5 +126,10 @@ class ApplicationController < ActionController::Base
 
     def current_budget
       Budget.current
+    end
+
+    def set_mailer_host
+      ActionMailer::Base.default_url_options[:host] = request.host
+      ActionMailer::Base.asset_host = request.protocol + request.host
     end
 end

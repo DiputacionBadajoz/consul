@@ -251,6 +251,13 @@ $sidebar-active: #f4fcd0;
     max-width: none;
   }
 
+  form {
+
+    .input-group-label {
+      height: $line-height * 2;
+    }
+  }
+
   .menu.simple {
     margin-bottom: $line-height / 2;
 
@@ -283,10 +290,6 @@ $sidebar-active: #f4fcd0;
 
     .proposal-form {
       padding-top: 0;
-    }
-
-    .proposal-show {
-      padding-top: rem-calc(54);
     }
   }
 
@@ -1192,17 +1195,6 @@ table {
       content: '\76';
     }
   }
-}
-
-.max-headings-label {
-  color: $text-medium;
-  font-size: $small-font-size;
-  margin-left: $line-height / 2;
-}
-
-.current-of-max-headings {
-  color: #000;
-  font-weight: bold;
 }
 
 // 11. Newsletters

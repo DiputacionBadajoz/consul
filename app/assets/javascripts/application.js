@@ -82,6 +82,7 @@
 //= require globalize
 //= require tenants
 //= require send_admin_notification_alert
+//= require tenants
 
 var initialize_modules = function() {
   App.Comments.initialize();
@@ -129,6 +130,7 @@ var initialize_modules = function() {
   App.Globalize.initialize();
   App.Tenants.initialize();
   App.SendAdminNotificationAlert.initialize();
+  App.Tenants.initialize();
 };
 
 $(function(){

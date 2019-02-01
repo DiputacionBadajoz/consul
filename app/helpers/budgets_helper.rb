@@ -27,7 +27,7 @@ module BudgetsHelper
 
   def namespaced_budget_investment_path(investment, options = {})
     case namespace
-    when "management/budgets"
+    when "management"
       management_budget_investment_path(investment.budget, investment, options)
     else
       budget_investment_path(investment.budget, investment, options)
@@ -36,7 +36,7 @@ module BudgetsHelper
 
   def namespaced_budget_investment_vote_path(investment, options = {})
     case namespace
-    when "management/budgets"
+    when "management"
       vote_management_budget_investment_path(investment.budget, investment, options)
     else
       vote_budget_investment_path(investment.budget, investment, options)
@@ -58,6 +58,10 @@ module BudgetsHelper
 
   def investment_tags_select_options(budget)
     Budget::Investment.by_budget(budget).tags_on(:valuation).order(:name).select(:name).distinct
+  end
+
+  def unfeasible_or_unselected_filter
+    ["unselected", "unfeasible"].include?(@current_filter)
   end
 
   def budget_published?(budget)

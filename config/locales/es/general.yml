@@ -106,7 +106,7 @@ es:
       orders:
         confidence_score: Mejor valorados
         created_at: Nuevos
-        hot_score: Más activos hoy
+        hot_score: Más activos
         most_commented: Más comentados
         relevance: Más relevantes
         recommendations: Recomendaciones
@@ -249,7 +249,6 @@ es:
       text_sign_in: iniciar sesión
       text_sign_up: registrarte
       title: '¿Cómo puedo comentar este documento?'
-  locale: Español
   notifications:
     index:
       empty_notifications: No tienes notificaciones nuevas.
@@ -347,7 +346,7 @@ es:
       orders:
         confidence_score: Más apoyadas
         created_at: Nuevas
-        hot_score: Más activas hoy
+        hot_score: Más activas
         most_commented: Más comentadas
         relevance: Más relevantes
         archival_date: Archivadas
@@ -378,7 +377,7 @@ es:
       select_order: Ordenar por
       select_order_long: 'Estas viendo las propuestas'
       start_proposal: Crea una propuesta
-      title: Propuestas
+      title: Propuestas ciudadanas
       top: Top semanal
       top_link_proposals: Propuestas más apoyadas por categoría
       section_header:
@@ -438,6 +437,7 @@ es:
       flag: Esta propuesta ha sido marcada como inapropiada por varios usuarios.
       login_to_comment: Necesitas %{signin} o %{signup} para comentar.
       notifications_tab: Notificaciones
+      milestones_tab: Seguimiento
       retired_warning: "El autor de esta propuesta considera que ya no debe seguir recogiendo apoyos."
       retired_warning_link_to_explanation: Revisa su explicación antes de apoyarla.
       retired: Propuesta retirada por el autor
@@ -451,6 +451,9 @@ es:
     update:
       form:
         submit_button: Guardar cambios
+    share:
+      message: "He apoyado la propuesta %{summary} en %{org}. Si te interesa, ¡apoya tú también!"
+      message_mobile: "He apoyado la propuesta %{summary} en %{handle}. Si te interesa, ¡apoya tú también!"
   polls:
     all: "Todas"
     no_dates: "sin fecha asignada"
@@ -467,8 +470,11 @@ es:
       participate_button_expired: "Votación terminada"
       no_geozone_restricted: "Toda la ciudad"
       geozone_restricted: "Distritos"
-      geozone_info: 'Pueden participar las personas empadronadas en: '
+      geozone_info: "Pueden participar las personas empadronadas en: "
       already_answer: "Ya has participado en esta votación"
+      not_logged_in: "Necesitas iniciar sesión o registrarte para participar"
+      unverified: "Por favor verifica tu cuenta para participar"
+      cant_answer: "Esta votación no está disponible en tu zona"
       section_header:
         icon_alt: Icono de Votaciones
         title: Votaciones
@@ -513,7 +519,7 @@ es:
         null_votes: "Nulos"
       results:
         title: "Preguntas"
-        most_voted_answer: 'Respuesta más votada: '
+        most_voted_answer: "Respuesta más votada: "
   poll_questions:
     create_question: "Crear pregunta"
     show:
@@ -623,9 +629,9 @@ es:
       cards: Tarjetas
       list: Lista
     recommended_index:
-        title: Recomendaciones
-        see_more: Ver más recomendaciones
-        hide: Ocultar recomendaciones
+      title: Recomendaciones
+      see_more: Ver más recomendaciones
+      hide: Ocultar recomendaciones
   social:
     blog: "Blog de %{org}"
     facebook: "Facebook de %{org}"
@@ -648,7 +654,7 @@ es:
     index:
       title: Presupuestos participativos
       unfeasible: Propuestas de inversión no viables
-      by_geozone: 'Propuestas de inversión con ámbito: %{geozone}'
+      by_geozone: "Propuestas de inversión con ámbito: %{geozone}"
       search_form:
         button: Buscar
         placeholder: Propuestas de inversión...
@@ -846,4 +852,4 @@ es:
       text: Para comentar este documento debes %{sign_in} o %{sign_up}. Después selecciona el texto que quieres comentar y pulsa en el botón con el lápiz.
       text_sign_in: iniciar sesión
       text_sign_up: registrarte
-      title: "¿Cómo puedo comentar este documento?"
+      title: '¿Cómo puedo comentar este documento?'

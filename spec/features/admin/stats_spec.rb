@@ -131,10 +131,24 @@ feature 'Stats' do
 
       expect(page).to have_css(".proposal_notification", count: 3)
 
-      ProposalNotification.all.each do |proposal_notification|
+      ProposalNotification.find_each do |proposal_notification|
         expect(page).to have_content proposal_notification.title
         expect(page).to have_content proposal_notification.body
       end
+    end
+
+    scenario "Deleted proposals" do
+      proposal_notification = create(:proposal_notification)
+      proposal_notification.proposal.destroy
+
+      visit admin_stats_path
+      click_link "Proposal notifications"
+
+      expect(page).to have_css(".proposal_notification", count: 1)
+
+      expect(page).to have_content proposal_notification.title
+      expect(page).to have_content proposal_notification.body
+      expect(page).to have_content "Proposal not available"
     end
 
   end

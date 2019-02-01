@@ -2,14 +2,14 @@ class Image < ActiveRecord::Base
   include ImagesHelper
   include ImageablesHelper
 
-  TITLE_LEGHT_RANGE = 4..80
+  TITLE_LENGTH_RANGE = 4..80
   MIN_SIZE = 475
   MAX_IMAGE_SIZE = 1.megabyte
   ACCEPTED_CONTENT_TYPE = %w(image/jpeg image/jpg).freeze
 
   has_attached_file :attachment, styles: { large: "x#{MIN_SIZE}", medium: "300x300#", thumb: "140x245#" },
                                  url: "/system/:class/:prefix/:style/:hash.:extension",
-                                 hash_data: ":class/:style",
+                                 hash_data: ":class/:style/:updated_at",
                                  use_timestamp: false,
                                  hash_secret: Rails.application.secrets.secret_key_base
   attr_accessor :cached_attachment
@@ -23,7 +23,7 @@ class Image < ActiveRecord::Base
   validate :attachment_presence
   validate :validate_attachment_content_type,         if: -> { attachment.present? }
   validate :validate_attachment_size,                 if: -> { attachment.present? }
-  validates :title, presence: true, length: { in: TITLE_LEGHT_RANGE }
+  validates :title, presence: true, length: { in: TITLE_LENGTH_RANGE }
   validates :user_id, presence: true
   validates :imageable_id, presence: true,         if: -> { persisted? }
   validates :imageable_type, presence: true,       if: -> { persisted? }

@@ -15,6 +15,10 @@ def log(msg)
   @logger.info "#{msg}\n"
 end
 
+def random_locales
+  [I18n.default_locale, *I18n.available_locales.sample(4)].uniq
+end
+
 require_relative 'dev_seeds/settings'
 require_relative 'dev_seeds/geozones'
 require_relative 'dev_seeds/users'
@@ -36,5 +40,8 @@ require_relative 'dev_seeds/notifications'
 require_relative 'dev_seeds/tenants'
 require_relative 'dev_seeds/widgets'
 require_relative 'dev_seeds/admin_notifications'
+require_relative 'dev_seeds/legislation_proposals'
+require_relative 'dev_seeds/milestones'
+require_relative 'dev_seeds/tenants'
 
 log "All dev seeds created successfuly 👍"

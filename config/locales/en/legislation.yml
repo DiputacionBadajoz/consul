@@ -52,6 +52,9 @@ en:
         more_info: More information and context
       proposals:
         empty_proposals: There are no proposals
+        filters:
+          random: Random
+          winners: Selected
       debate:
         empty_questions: There aren't any questions
         participate: Participate in the debate
@@ -79,11 +82,13 @@ en:
         see_latest_comments: See latest comments
         see_latest_comments_title: Comment on this process
       shared:
-        key_dates: Key dates
+        key_dates: Participation phases
+        homepage: Homepage
         debate_dates: Debate
         draft_publication_date: Draft publication
-        allegations_dates: Allegations
+        allegations_dates: Comments
         result_publication_date: Final result publication
+        milestones_date: Following
         proposals_dates: Proposals
     questions:
       comments:
@@ -120,4 +125,3 @@ en:
       form:
         tags_label: "Categories"
       not_verified: "For vote proposals %{verify_account}."
-      closed: "This process has been closed and can not receive votes."

@@ -7,6 +7,11 @@ feature "Admin custom information texts" do
     login_as(admin.user)
   end
 
+  it_behaves_like "translatable",
+                  "i18n_content",
+                  "admin_site_customization_information_texts_path",
+                  %w[value]
+
   scenario 'page is correctly loaded' do
     visit admin_site_customization_information_texts_path
 
@@ -16,7 +21,7 @@ feature "Admin custom information texts" do
     click_link 'Community'
     expect(page).to have_content 'Access the community'
 
-    click_link 'Proposals'
+    within("#information-texts-tabs") { click_link "Proposals" }
     expect(page).to have_content 'Create proposal'
 
     within "#information-texts-tabs" do
@@ -37,11 +42,16 @@ feature "Admin custom information texts" do
 
     expect(page).to have_content 'This user account is already verified.'
 
-    click_link 'Guides'
-    expect(page).to have_content 'Choose what you want to create'
-
     click_link 'Welcome'
     expect(page).to have_content 'See all debates'
+  end
+
+  scenario 'check that tabs are highlight when click it' do
+    visit admin_site_customization_information_texts_path
+
+    within("#information-texts-tabs") { click_link "Proposals" }
+    expect(find("a[href=\"/admin/site_customization/information_texts?tab=proposals\"].is-active"))
+          .to have_content "Proposals"
   end
 
   context "Globalization" do
@@ -113,60 +123,6 @@ feature "Admin custom information texts" do
       expect(debate_text.value_en).to eq('Custom debate text')
       expect(debate_title.value_en).to eq('Custom debate title')
     end
-
-    context "Javascript interface" do
-
-      scenario "Highlight current locale", :js do
-        visit admin_site_customization_information_texts_path
-
-        expect(find("a.js-globalize-locale-link.is-active")).to have_content "English"
-
-        select('Español', from: 'locale-switcher')
-
-        expect(find("a.js-globalize-locale-link.is-active")).to have_content "Español"
-      end
-
-      scenario "Highlight selected locale", :js do
-        key = "debates.form.debate_title"
-        content = create(:i18n_content, key: key, value_es: 'Título')
-
-        visit admin_site_customization_information_texts_path
-
-        expect(find("a.js-globalize-locale-link.is-active")).to have_content "English"
-
-        click_link "Español"
-
-        expect(find("a.js-globalize-locale-link.is-active")).to have_content "Español"
-      end
-
-      scenario "Show selected locale form", :js do
-        key = "debates.form.debate_title"
-        content = create(:i18n_content, key: key,
-                                        value_en: 'Title',
-                                        value_es: 'Título')
-
-        visit admin_site_customization_information_texts_path
-
-        expect(page).to have_field("contents_content_#{key}values_value_en", with: 'Title')
-
-        click_link "Español"
-
-        expect(page).to have_field("contents_content_#{key}values_value_es", with: 'Título')
-      end
-
-      scenario "Select a locale and add it to the form", :js do
-        key = "debates.form.debate_title"
-
-        visit admin_site_customization_information_texts_path
-        select "Français", from: "translation_locale"
-
-        expect(page).to have_link "Français"
-
-        click_link "Français"
-        expect(page).to have_field("contents_content_#{key}values_value_fr")
-      end
-    end
-
   end
 
 end
