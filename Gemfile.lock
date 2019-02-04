@@ -329,6 +329,7 @@ GEM
       arel (>= 6)
     powerpack (0.1.2)
     public_suffix (3.0.3)
+    pyu-ruby-sasl (0.0.3.3)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.11)
@@ -403,6 +404,7 @@ GEM
     rubocop-rspec (1.26.0)
       rubocop (>= 0.53.0)
     ruby-progressbar (1.10.0)
+    rubyntlm (0.6.2)
     rubyzip (1.2.2)
     rvm1-capistrano3 (1.4.0)
       capistrano (~> 3.0)
@@ -589,4 +591,4 @@ DEPENDENCIES
   whenever (~> 0.10.0)
 
 BUNDLED WITH
-   1.17.1
+   1.17.2
