@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190103132925) do
+ActiveRecord::Schema.define(version: 20190214103106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -418,6 +418,7 @@ ActiveRecord::Schema.define(version: 20190103132925) do
     t.string   "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "tenant"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
@@ -1336,11 +1337,14 @@ ActiveRecord::Schema.define(version: 20190103132925) do
     t.string   "postal_code"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "endpoint_census"
+    t.string   "institution_code_census"
+    t.string   "portal_name_census"
+    t.string   "user_code_census"
     t.string   "user_census"
     t.string   "password_census"
     t.integer  "entity_census"
     t.integer  "organization_census"
-    t.string   "endpoint_census"
   end
 
   create_table "topics", force: :cascade do |t|
