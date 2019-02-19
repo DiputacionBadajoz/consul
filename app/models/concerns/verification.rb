@@ -45,7 +45,6 @@ module Verification
   end
 
   def level_three_verified?
-    byebug
     return true if skip_verification?
     verified_at.present?
   end
