@@ -20,17 +20,17 @@ class DipbaCensusApi
     end
 
     def valid?
-      data["s"]["res"]["exito"] == "-1"
+      data.nil? ? false : data["s"]["res"]["exito"] == "-1"
     end
 
     def encontrado?
-      data["s"]["par"]["encontrado"] == "1"
+      data.nil? ? false : data["s"]["par"]["encontrado"] == "1"
     end
 
     private
 
       def data
-        Hash.from_xml(@body[:servicio_response][:servicio_return])
+         @body.present? ? Hash.from_xml(@body[:servicio_response][:servicio_return]) : nil
       end
   end
 
@@ -55,7 +55,7 @@ class DipbaCensusApi
       token = generate_token(actualDate, nonce, 'llave1')
       document = remove_new_lines(Base64.encode64(document_number))
       password = remove_new_lines(Base64.encode64(Digest::SHA1.digest(@tenant['password_census'])))
-      formatted_birth_date = birth_date.strftime("%Y%m%d%H%M%S")
+      formatted_birth_date =  !birth_date.nil? ? birth_date.strftime("%Y%m%d%H%M%S") : nil
 
       request = {
         ope: {
