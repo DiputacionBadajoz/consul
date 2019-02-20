@@ -43,7 +43,7 @@ es:
       edit:
         editing: Editar el banner
         form:
-          submit_button: Guardar Cambios
+          submit_button: Guardar cambios
       errors:
         form:
           error:
@@ -68,7 +68,7 @@ es:
           on_proposals: Propuestas
           on_users: Usuarios
           on_system_emails: Emails del sistema
-        title: Actividad de Moderadores
+        title: Actividad de moderadores
         type: Tipo
         no_activity: No hay actividad de moderadores.
     budgets:
@@ -87,7 +87,7 @@ es:
         table_edit_budget: Editar
         edit_groups: Editar grupos de partidas
         edit_budget: Editar presupuesto
-        no_budgets: "No hay presupuestos abiertos."
+        no_budgets: "No hay presupuestos participativos."
       create:
         notice: '¡Presupuestos participativos creados con éxito!'
       update:
@@ -110,7 +110,7 @@ es:
       winners:
         calculate: Calcular proyectos ganadores
         calculated: Calculando ganadores, puede tardar un minuto.
-        recalculate: Recalcular propuestas ganadoras
+        recalculate: Recalcular proyectos ganadores
     budget_groups:
       name: "Nombre"
       headings_name: "Partidas"
@@ -165,7 +165,7 @@ es:
         back: "Volver a grupos"
     budget_phases:
       edit:
-        start_date: Fecha de Inicio
+        start_date: Fecha de inicio
         end_date: Fecha de fin
         summary: Resumen
         summary_help_text: Este texto informará al usuario sobre la fase. Para mostrarlo aunque la fase no esté activa, marca la opción de más abajo.
@@ -182,11 +182,6 @@ es:
         tags_filter_all: Todas las etiquetas
         advanced_filters: Filtros avanzados
         placeholder: Buscar proyectos
-        sort_by:
-          placeholder: Ordenar por
-          id: ID
-          title: Título
-          supports: Apoyos
         filters:
           all: Todos
           without_admin: Sin administrador
@@ -214,7 +209,7 @@ es:
           feasible: "Viable (%{price})"
           unfeasible: "Inviable"
           undecided: "Sin decidir"
-        selected: "Seleccionada"
+        selected: "Seleccionado"
         select: "Seleccionar"
         list:
           id: ID
@@ -257,7 +252,7 @@ es:
           "true": Seleccionado
           "false": No seleccionado
         winner:
-          title: Ganadora
+          title: Ganador
           "true": "Si"
           "false": "No"
         image: "Imagen"
@@ -355,7 +350,6 @@ es:
         notice: "Barra de progreso actualizada"
       delete:
         notice: "Barra de progreso eliminada correctamente"
-
     comments:
       index:
         filter: Filtro
@@ -440,16 +434,13 @@ es:
           homepage_description: Aquí puedes explicar el contenido del proceso
           homepage_enabled: Homepage activada
           banner_title: Colores del encabezado
-          banner_background_color: Color de fondo
-          banner_font_color: Color del texto
+          color_help: Formato hexadecimal
         index:
           create: Nuevo proceso
           delete: Borrar
           title: Procesos de legislación colaborativa
           filters:
-            open: Abiertos
-            next: Próximamente
-            past: Pasados
+            active: Activos
             all: Todos
         new:
           back: Volver
@@ -460,12 +451,13 @@ es:
           orders:
             id: Id
             title: Título
-            supports: Apoyos
+            supports: Apoyos totales
         process:
           title: Proceso
           comments: Comentarios
           status: Estado
-          creation_date: Fecha creación
+          start_date: Fecha de apertura
+          end_date: Fecha de cierre
           status_open: Abierto
           status_closed: Cerrado
           status_planned: Próximamente
@@ -484,12 +476,12 @@ es:
           title: Título
           back: Volver
           id: Id
-          supports: Apoyos
+          supports: Apoyos totales
           select: Seleccionar
           selected: Seleccionada
         form:
           custom_categories: Categorías
-          custom_categories_description: Categorías que el usuario puede seleccionar al crear la propuesta.
+          custom_categories_description: Categorías que el usuario puede seleccionar al crear la propuesta. Máximo 160 caracteres por categoría.
           custom_categories_placeholder: Escribe las etiquetas que desees separadas por una coma (,) y entrecomilladas ("")
       draft_versions:
         create:
@@ -586,7 +578,7 @@ es:
         email: Email
         no_managers: No hay gestores.
       manager:
-        add: Añadir como Gestor
+        add: Añadir como gestor
         delete: Borrar
       search:
         title: 'Gestores: Búsqueda de usuarios'
@@ -656,9 +648,9 @@ es:
     administrators:
       index:
         title: Administradores
-        id: ID de Administrador
         name: Nombre
         email: Email
+        id: ID de Administrador
         no_administrators: No hay administradores.
       administrator:
         add: Añadir como Administrador
@@ -875,6 +867,7 @@ es:
       flash:
         create: "Añadido turno de presidente de mesa"
         destroy: "Eliminado turno de presidente de mesa"
+        unable_to_destroy: "No se pueden eliminar turnos que tienen resultados o recuentos asociados"
         date_missing: "Debe seleccionarse una fecha"
       vote_collection: Recoger Votos
       recount_scrutiny: Recuento & Escrutinio
@@ -914,13 +907,22 @@ es:
         no_booths: "No hay urnas asignadas a esta votación."
         table_name: "Nombre"
         table_location: "Ubicación"
+    active_polls:
+      edit:
+        title: "Descripción general de votaciones"
+      form:
+        description:
+          text: "Descripción"
+          help_text: "Este texto aparecerá en la cabecera de la página de votaciones. Puedes usarlo para añadir un contexto a las votaciones abiertas"
     polls:
       index:
-        title: "Listado de votaciones activas"
+        title: "Listado de votaciones"
         no_polls: "No hay ninguna votación próximamente."
         create: "Crear votación"
         name: "Nombre"
         dates: "Fechas"
+        start_date: "Fecha de apertura"
+        closing_date: "Fecha de cierre"
         geozone_restricted: "Restringida a los distritos"
       new:
         title: "Nueva votación"
@@ -974,7 +976,7 @@ es:
         edit_question: Editar pregunta
         valid_answers: Respuestas válidas
         add_answer: Añadir respuesta
-        video_url: Video externo
+        video_url: Vídeo externo
         answers:
           title: Respuesta
           description: Descripción
@@ -1345,7 +1347,7 @@ es:
         table:
           poll_name: Votación
           question_name: Pregunta
-          origin_web: Participantes Web
+          origin_web: Participantes en Web
           origin_total: Participantes Totales
     tags:
       create: Crear tema
@@ -1360,8 +1362,8 @@ es:
     users:
       columns:
         name: Nombre
-        email: Correo electrónico
-        document_number: DNI/Pasaporte/Tarjeta de residencia
+        email: Email
+        document_number: Número de documento
         roles: Roles
         verification_level: Nivel de verficación
       index:
@@ -1377,7 +1379,7 @@ es:
         title: Verificaciones incompletas
     site_customization:
       content_blocks:
-        information: "Información sobre los bloques de contenido"
+        information: Información sobre los bloques de contenido
         about: "Puedes crear bloques de contenido HTML que se podrán incrustar en diferentes sitios de tu página."
         html_format: "Un bloque de contenido es un grupo de enlaces, y debe de tener el siguiente formato:"
         no_blocks: "No hay bloques de texto."
@@ -1461,8 +1463,15 @@ es:
           description: Descripción
           link_text: Texto del enlace
           link_url: URL del enlace
+          columns_help: "Ancho de la tarjeta en número de columnas. En pantallas móviles siempre es un ancho del 100%."
+          create:
+            notice: "¡Tarjeta creada con éxito!"
+          update:
+            notice: "Tarjeta actualizada con éxito"
+          destroy:
+            notice: "Tarjeta eliminada con éxito"
     homepage:
-      title: Título
+      title: Homepage
       description: Los módulos activos aparecerán en la homepage en el mismo orden que aquí.
       header_title: Encabezado
       no_header: No hay encabezado.

@@ -4,6 +4,9 @@ module Budgets
     include FeatureFlags
     include CommentableActions
     include FlagActions
+    include ImageAttributes
+
+    PER_PAGE = 10
 
     before_action :authenticate_user!, except: [:index, :show, :json_data]
 
@@ -26,7 +29,9 @@ module Budgets
 
     has_orders %w{most_voted newest oldest}, only: :show
     has_orders ->(c) { c.instance_variable_get(:@budget).investments_orders }, only: :index
-    has_filters %w{not_unfeasible feasible unfeasible unselected selected}, only: [:index, :show, :suggest]
+
+    valid_filters = %w[not_unfeasible feasible unfeasible unselected selected winners]
+    has_filters valid_filters, only: [:index, :show, :suggest]
 
     invisible_captcha only: [:create, :update], honeypot: :subtitle, scope: :budget_investment
 
@@ -34,18 +39,10 @@ module Budgets
     respond_to :html, :js
 
     def index
-      all_investments = if @budget.finished?
-                          investments.winners
-                        else
-                          investments
-                        end
-
-      @investments = all_investments.page(params[:page]).per(10).for_render
+      @investments = investments.page(params[:page]).per(PER_PAGE).for_render
 
       @investment_ids = @investments.pluck(:id)
-      @investments_map_coordinates =  MapLocation.where(investment: all_investments).map do |loc|
-        loc.json_data
-      end
+      @investments_map_coordinates = MapLocation.where(investment: investments).map(&:json_data)
 
       load_investment_votes(@investments)
       @tag_cloud = tag_cloud
@@ -136,7 +133,7 @@ module Budgets
         params.require(:budget_investment)
               .permit(:title, :description, :heading_id, :tag_list,
                       :organization_name, :location, :terms_of_service, :skip_map,
-                      image_attributes: [:id, :title, :attachment, :cached_attachment, :user_id, :_destroy],
+                      image_attributes: image_attributes,
                       documents_attributes: [:id, :title, :attachment, :cached_attachment, :user_id, :_destroy],
                       map_location_attributes: [:latitude, :longitude, :zoom])
       end
@@ -172,11 +169,11 @@ module Budgets
 
       def investments
         if @current_order == 'random'
-          @investments.apply_filters_and_search(@budget, params, @current_filter)
-                      .send("sort_by_#{@current_order}", params[:random_seed])
+          @budget.investments.apply_filters_and_search(@budget, params, @current_filter)
+                             .send("sort_by_#{@current_order}", params[:random_seed])
         else
-          @investments.apply_filters_and_search(@budget, params, @current_filter)
-                      .send("sort_by_#{@current_order}")
+          @budget.investments.apply_filters_and_search(@budget, params, @current_filter)
+                             .send("sort_by_#{@current_order}")
         end
       end
 
