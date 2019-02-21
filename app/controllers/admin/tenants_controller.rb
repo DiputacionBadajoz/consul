@@ -42,7 +42,7 @@ class Admin::TenantsController < Admin::BaseController
   private
 
     def main_tenant?(tenant)
-      tenant.subdomain == 'public'
+      tenant.subdomain == "public"
     end
 
     def tenant_params
