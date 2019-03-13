@@ -27,6 +27,14 @@ class DipbaCensusApi
       data.nil? ? false : data["s"]["par"]["encontrado"] == "1"
     end
 
+    def district_code
+      nil
+    end
+
+    def gender
+      nil
+    end
+
     private
 
       def data
