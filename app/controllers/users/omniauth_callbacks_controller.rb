@@ -1,5 +1,19 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
+  def twitter_setup
+    tenant = Tenant.current
+    request.env['omniauth.strategy'].options[:consumer_key] = tenant.twitter_key
+    request.env['omniauth.strategy'].options[:consumer_secret] = tenant.twitter_secret
+    render :text => "Omniauth Twitter setup phase.", :status => 404
+  end
+
+  def facebook_setup
+    tenant = Tenant.current
+    request.env['omniauth.strategy'].options[:client_id] = tenant.facebook_key
+    request.env['omniauth.strategy'].options[:client_secret] = tenant.facebook_secret
+    render :text => "Omniauth Facebook setup phase.", :status => 404
+  end
+
   def twitter
     sign_in_with :twitter_login, :twitter
   end

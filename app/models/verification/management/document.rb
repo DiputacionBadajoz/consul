@@ -21,7 +21,7 @@ class Verification::Management::Document
     if skip_verification?
       true
     else
-      response = CensusCaller.new.call(Tenant.find_by(subdomain: Apartment::Tenant.current), document_type, document_number,
+      response = CensusCaller.new.call(Tenant.current, document_type, document_number,
         !user.nil? ? user.date_of_birth : nil)
       response.valid? && valid_age?(response)
     end
