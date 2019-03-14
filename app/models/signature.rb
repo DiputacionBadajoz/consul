@@ -70,8 +70,8 @@ class Signature < ActiveRecord::Base
   def in_census?
     document_types.detect do |document_type|
       userTemp = User.active.by_document(document_type, document_number).first
-      response = CensusCaller.new.call(Tenant.find_by(subdomain: Apartment::Tenant.current), document_type,
-        document_number, !userTemp.nil? ? userTemp.date_of_birth : nil)
+      response = CensusCaller.new.call(Tenant.current, document_type, document_number,
+        !userTemp.nil? ? userTemp.date_of_birth : nil)
       if response.valid?
         @census_api_response = response
         true
