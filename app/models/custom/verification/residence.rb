@@ -7,6 +7,9 @@ class Verification::Residence
   validate :residence_tenant
 
   def postal_code_tenant
+    if @tenant.nil?
+      @tenant = Tenant.current
+    end
     errors.add(:postal_code, I18n.t('verification.residence.new.error_not_allowed_postal_code')) unless valid_postal_code?
   end
 
@@ -18,10 +21,6 @@ class Verification::Residence
       store_failed_attempt
       Lock.increase_tries(user)
     end
-  end
-
-  def set_tenant(tenant)
-    @tenant = tenant
   end
 
   private

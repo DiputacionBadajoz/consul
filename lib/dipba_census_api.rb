@@ -1,7 +1,7 @@
 include DocumentParser
 class DipbaCensusApi
 
-  def initialize(tenant)
+  def initialize(tenant = Tenant.current)
     @tenant = tenant
   end
 
@@ -85,7 +85,47 @@ class DipbaCensusApi
     end
 
     def end_point_available?
-      !(@tenant['endpoint_census'].nil? || @tenant['endpoint_census'].empty?)
+      if Rails.env.staging? || Rails.env.preproduction? || Rails.env.production?
+        !(@tenant['endpoint_census'].nil? || @tenant['endpoint_census'].empty?)
+      else
+        false
+      end
+    end
+
+    def stubbed_response(document_type, document_number)
+      if (document_number == "12345678Z" || document_number == "12345678Y") && document_type == "1"
+        stubbed_valid_response
+      else
+        stubbed_invalid_response
+      end
+    end
+
+    def stubbed_valid_response
+      {
+        get_habita_datos_response: {
+          get_habita_datos_return: {
+            datos_habitante: {
+              item: {
+                fecha_nacimiento_string: "31-12-1980",
+                identificador_documento: "12345678Z",
+                descripcion_sexo: "Varón",
+                nombre: "José",
+                apellido1: "García"
+              }
+            },
+            datos_vivienda: {
+              item: {
+                codigo_postal: "28013",
+                codigo_distrito: "01"
+              }
+            }
+          }
+        }
+      }
+    end
+
+    def stubbed_invalid_response
+      {get_habita_datos_response: {get_habita_datos_return: {datos_habitante: {}, datos_vivienda: {}}}}
     end
 
     def dni?(document_type)

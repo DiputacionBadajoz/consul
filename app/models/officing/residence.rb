@@ -102,8 +102,7 @@ class Officing::Residence
   private
 
     def retrieve_census_data
-      @census_api_response = CensusCaller.new.call(Tenant.current, document_type,
-        document_number, date_of_birth)
+      @census_api_response = CensusCaller.new.call(document_type, document_number, date_of_birth)
     end
 
     def residency_valid?

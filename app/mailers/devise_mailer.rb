@@ -9,7 +9,9 @@ class DeviseMailer < Devise::Mailer
     dup = Rails.application.config.action_mailer.default_url_options
     if Apartment::Tenant.current != "public"
         tenant = Tenant.current
-        dup = { host: "#{tenant.subdomain}.#{tenant.server_name}" }
+        unless tenant.nil?
+          dup = { host: "#{tenant.subdomain}.#{tenant.server_name}" }
+        end
     end
 
     return dup
@@ -19,7 +21,9 @@ class DeviseMailer < Devise::Mailer
     ah = Rails.application.config.action_mailer.asset_host
     if Apartment::Tenant.current != "public"
         tenant = Tenant.current
-        ah = "#{tenant.subdomain}.#{tenant.server_name}"
+        unless tenant.nil?
+          ah = "#{tenant.subdomain}.#{tenant.server_name}"
+        end
     end
 
     return ah

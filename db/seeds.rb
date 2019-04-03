@@ -6,7 +6,7 @@ if Administrator.count == 0 && !Rails.env.test?
 end
 
 if Apartment::Tenant.current == 'public'
-  Tenant.create(name: 'Consul', title: 'Consul',  subdomain: 'public', postal_code: '280')
+  Tenant.create(name: 'Consul', title: 'Consul',  subdomain: 'public', postal_code: '280', server_name: 'localhost')
 end
 
 # Names for the moderation console, as a hint for moderators
@@ -139,3 +139,6 @@ Setting["feature.user.skip_verification"] = 'true'
 Setting['feature.homepage.widgets.feeds.proposals'] = true
 Setting['feature.homepage.widgets.feeds.debates'] = true
 Setting['feature.homepage.widgets.feeds.processes'] = true
+
+# Votes hot_score configuration
+Setting['hot_score_period_in_days'] = 31
