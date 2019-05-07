@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Admin legislation processes" do
+feature "Admin collaborative legislation" do
 
   background do
     admin = create(:administrator)
@@ -19,7 +19,7 @@ feature "Admin legislation processes" do
   context "Feature flag" do
 
     scenario "Disabled with a feature flag" do
-      Setting["feature.legislation"] = nil
+      Setting["process.legislation"] = nil
       expect{ visit admin_legislation_processes_path }
       .to raise_exception(FeatureFlags::FeatureDisabled)
     end
@@ -28,7 +28,7 @@ feature "Admin legislation processes" do
 
   context "Index" do
 
-    scenario "Displaying legislation processes" do
+    scenario "Displaying collaborative legislation" do
       process_1 = create(:legislation_process, title: "Process open")
       process_2 = create(:legislation_process, title: "Process for the future",
                                                start_date: Date.current + 5.days)
