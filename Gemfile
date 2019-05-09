@@ -55,6 +55,7 @@ gem 'whenever', '~> 0.10.0', require: false
 gem 'globalize', '~> 5.0.0'
 gem 'globalize-accessors', '~> 0.2.1'
 gem 'apartment', '~> 2.2'
+gem 'faraday', '~> 0.12.1'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-leaflet'
